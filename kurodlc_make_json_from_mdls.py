@@ -73,6 +73,7 @@ class dlc_table_maker:
                 for x in t_name['NameTableData'] if x['char_id'] < 200}
             return(name_dict)
         else:
+            input("Warning, t_name.tbl is missing, this script will likely crash! Press Enter to continue.")
             return False
 
     def get_items_from_jsons (self):
