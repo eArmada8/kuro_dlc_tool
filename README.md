@@ -18,10 +18,10 @@ This tool was written using the schemas provided in KuroTools, and has thus bene
 *This script expects t_name.tbl to be available.*
 
 Before you start, you will want to determine some information:
-1. DLC ID number:  I recommend keeping the number <250, but be sure to use a number that isn't already in use.
+1. DLC ID number:  I recommend keeping the number <350, but be sure to use a number that isn't already in use.
 2. Item ID numbers:  You need to choose item numbers that are valid, but are not already in the game.
 
-You can use `kurodlc_find_dlc_id.py` and `kurodlc_find_item_id.py` to check for unused ID numbers.  Place the original t_dlc.tbl and t_item.tbl in the folder (if they are already renamed to t_dlc.tbl.original and t_item.tbl.original, that is fine).  Run the scripts and they will tell you roughly what numbers are in use.  The easiest is to pick something slightly above the upper number, but do not go too high or the game will not accept the numbers.
+You can use `kurodlc_find_dlc_id.py` and `kurodlc_find_item_id.py` to check for unused ID numbers.  Place the original t_costume.tbl, t_dlc.tbl and t_item.tbl in the folder (if they are already renamed to t_costume.tbl.original, t_dlc.tbl.original and t_item.tbl.original, that is fine).  Run the scripts and they will tell you roughly what numbers are in use.  The easiest is to pick something slightly above the upper number, but do not go too high or the game will not accept the numbers.
 
 Place all your .mdl files in a folder, and put `kurodlc_make_json_from_mdls.py` and t_name.tbl files in the same folder.  Run `kurodlc_make_json_from_mdls.py`.  If there are .json files with settings, the script will just make the .kurodlc.json file, but the first time you run it (assuming you did not make the .json files by hand) it will ask you questions.
 
