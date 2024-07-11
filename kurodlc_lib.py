@@ -134,7 +134,7 @@ class kuro_tables:
                     input("Validation of {0} failed, one or more values in {1} do not match the schema!".format(json_name, key))
                     raise
             else:
-                input("Validation of {} failed, schema not yet loaded.".format(json_name))
+                input("Validation of {0} in {1} failed, schema not found! (tbl file missing)".format(key, json_name))
                 raise
         return(json_data)
 
