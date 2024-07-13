@@ -20,7 +20,7 @@ class kuro_tables:
         self.init_schemas()
 
     def init_schemas(self):
-        tables = [x+'.original' if os.path.exists(x+'.original') else x for x in glob.glob('*.tbl')]
+        tables = glob.glob('*.tbl.original') + [x for x in glob.glob('*.tbl') if not os.path.exists(x+'.original')]
         for table_name in tables:
             with open(table_name, 'rb') as f:
                 magic = f.read(4)
