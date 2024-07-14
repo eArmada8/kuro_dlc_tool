@@ -29,6 +29,11 @@ if __name__ == "__main__":
     kt.read_all_kurodlc_jsons()
     
     # Write the new tables
-    kt.write_table('t_costume.tbl')
-    kt.write_table('t_dlc.tbl')
-    kt.write_table('t_item.tbl')
+    if os.path.exists('t_costume.tbl') or  os.path.exists('t_costume.tbl.original'):
+        kt.write_table('t_costume.tbl')
+    if os.path.exists('t_dlc.tbl') or  os.path.exists('t_dlc.tbl.original'):
+        kt.write_table('t_dlc.tbl')
+    if os.path.exists('t_item.tbl') or  os.path.exists('t_item.tbl.original'):
+        kt.write_table('t_item.tbl')
+    if os.path.exists('t_shop.tbl') or  os.path.exists('t_shop.tbl.original'):
+        kt.write_table('t_shop.tbl')

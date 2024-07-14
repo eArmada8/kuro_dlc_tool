@@ -24,8 +24,7 @@ class dlc_table_maker:
 
     def get_dlc_details (self):
         if os.path.exists('dlc.json'):
-            with open('dlc.json', 'r') as f:
-                dlc_details = json.loads(f.read())
+            dlc_details = self.kt.read_struct_from_json('dlc.json')
         else:
             dlc_details = {}
         while 'id' not in dlc_details.keys():
@@ -61,8 +60,7 @@ class dlc_table_maker:
             dlc_details['unk_arr'] = []
         while 'unk5' not in dlc_details.keys():
             dlc_details['unk5'] = 0
-        with open('dlc.json', "wb") as f:
-            f.write(json.dumps(dlc_details, indent=4).encode("utf-8"))
+        self.kt.write_struct_to_json(dlc_details, 'dlc.json')
         return(dlc_details)
 
     #Takes NameTableData.csv from tbled
@@ -80,8 +78,7 @@ class dlc_table_maker:
         items = {}
         jsons = glob.glob('*.mdl.json')
         for i in range(len(jsons)):
-            with open(jsons[i], 'r') as f:
-                mdl_details = json.loads(f.read())
+            mdl_details = self.kt.read_struct_from_json(jsons[i])
             if 'item_id' in mdl_details.keys():
                 items[mdl_details['item_id']] = mdl_details
         return(items)
@@ -109,8 +106,7 @@ class dlc_table_maker:
         for i in range(len(models)):
             print("\nProcessing {0}...\n".format(models[i]))
             if os.path.exists(models[i] + '.json'):
-                with open(models[i] + '.json', 'r') as f:
-                    mdl_details = json.loads(f.read())
+                mdl_details = self.kt.read_struct_from_json(models[i] + '.json')
             else:
                 mdl_details = {}
             while 'id' not in mdl_details.keys():
@@ -181,6 +177,31 @@ class dlc_table_maker:
                         mdl_details['item_quantity'] = min(max(int(item_quant_raw),1),99)
                     except ValueError:
                         print("Invalid entry!")
+            while 'stores' not in mdl_details.keys():
+                store_opt = input("Would you like to add this item to a store? (y/N) ")[0].lower()
+                if store_opt == 'y':
+                    if os.path.exists('t_shop.tbl') or os.path.exists('t_shop.tbl.original'):
+                        if os.path.exists('t_shop.tbl'):
+                            shop_info = self.kt.read_table('t_shop.tbl')['ShopInfo']
+                        else:
+                            shop_info = self.kt.read_table('t_shop.tbl.original')['ShopInfo']
+                        valid_stores = [x['id'] for x in shop_info]
+                        need_list = input("Would you like a list of stores? (y/N) ")[0].lower()
+                        if need_list == 'y':
+                            for j in range(len(shop_info)):
+                                print("{0}. {1}".format(shop_info[j]['id'], shop_info[j]['shop_name']))
+                                if (j+1) % 25 == 0:
+                                    input("Press Enter to continue...")
+                    else:
+                        print("t_shop.tbl unavailable, cannot display shop names.")
+                    raw_input = input("What stores should have this item? (Separate ID numbers by spaces) ")
+                    stores = sorted(list(set([int(x) for x in raw_input.split() if x.isnumeric()])))
+                    if len(stores) > 0:
+                        mdl_details['stores'] = stores
+                    else:
+                        print("Invalid input, please enter store IDs separated by spaces! e.g. 20 21 22")
+                else:
+                    mdl_details['stores'] = []
             while 'flags' not in mdl_details.keys():
                 mdl_details['flags'] = ''
             while 'unk_txt' not in mdl_details.keys() or mdl_details['unk_txt'] == '':
@@ -300,8 +321,7 @@ class dlc_table_maker:
             mdl_dict[models[i]] = mdl_details
             if mdl_details['id'] not in list(existing_items.keys()):
                 existing_items[mdl_details['id']] = mdl_details
-            with open(models[i] + '.json', "wb") as f:
-                f.write(json.dumps(mdl_details, indent=4).encode("utf-8"))
+            self.kt.write_struct_to_json(mdl_details, models[i] + '.json')
         return(mdl_dict)
 
     def make_item_entry (self, mdl_name):
@@ -341,22 +361,34 @@ class dlc_table_maker:
             "unk3": self.dlc_details['unk3'], "unk4": self.dlc_details['unk4'],\
             "unk_arr": self.dlc_details['unk_arr'], "unk5": self.dlc_details['unk5']})
 
+    def make_shop_entries (self, mdl_name):
+        mdl_data = self.models[mdl_name]
+        shop_entries = []
+        for i in range(len(mdl_data['stores'])):
+            shop_entries.append({"shop_id": mdl_data['stores'][i], "item_id": mdl_data['id'],\
+                "unknown": 1, "start_scena_flags": [], "empty1": 0, "end_scena_flags": [], "int2": 0})
+        return(shop_entries)
+
     def make_item_tbl_data (self):
         self.kurodlc_json['ItemTableData'] = []
         for i in range(len(self.model_list)):
-            if self.models[self.model_list[i]]['id'] not in self.kurodlc_json['ItemTableData']:
-                self.kurodlc_json['ItemTableData'].append(self.make_item_entry(self.model_list[i]))
+            self.kurodlc_json['ItemTableData'].append(self.make_item_entry(self.model_list[i]))
         return
 
     def make_costume_tbl_data (self):
         self.kurodlc_json['CostumeParam'] = []
         for i in range(len(self.model_list)):
-            if self.models[self.model_list[i]]['id'] not in self.kurodlc_json['CostumeParam']:
-                self.kurodlc_json['CostumeParam'].append(self.make_costume_entry(self.model_list[i]))
+            self.kurodlc_json['CostumeParam'].append(self.make_costume_entry(self.model_list[i]))
         return
 
     def make_dlc_tbl_data (self):
         self.kurodlc_json['DLCTableData'] = [self.make_dlc_entry()]
+        return
+
+    def make_shop_tbl_data (self):
+        self.kurodlc_json['ShopItem'] = []
+        for i in range(len(self.model_list)):
+            self.kurodlc_json['ShopItem'].extend(self.make_shop_entries(self.model_list[i]))
         return
 
 if __name__ == "__main__":
@@ -366,5 +398,6 @@ if __name__ == "__main__":
     dlc_table_maker.make_costume_tbl_data()
     dlc_table_maker.make_dlc_tbl_data()
     dlc_table_maker.make_item_tbl_data()
+    dlc_table_maker.make_shop_tbl_data()
     dlc_table_maker.kt.write_struct_to_json(dlc_table_maker.kurodlc_json,\
         dlc_table_maker.dlc_details['dlc_filename'] + '.kurodlc.json')

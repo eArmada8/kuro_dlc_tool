@@ -40,6 +40,11 @@ if __name__ == "__main__":
                 if x['id'] not in [x['id'] for x in t_dlc_original['DLCTableData']]],\
             'ItemTableData': [x for x in t_item['ItemTableData']\
                 if x['id'] not in [x['id'] for x in t_item_original['ItemTableData']]]}
+        if all([os.path.exists(x) for x in ['t_shop.tbl', 't_shop.tbl.original']]):
+            t_shop_original = kt.read_table('t_shop.tbl.original')
+            t_shop = kt.read_table('t_shop.tbl')
+            kurodlc_json['ShopItem'] = [x for x in t_shop['ShopItem']\
+                if x not in t_shop_original['ShopItem']]
         json_name = input("Please input name for .kurodlc.json file (e.g. \"my_mod\" for \"my_mod.kurodlc.json\") ")
         valid = '-_.[]() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
         json_name = ''.join([x if x in valid else '_' for x in json_name])

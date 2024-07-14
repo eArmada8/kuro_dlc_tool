@@ -79,6 +79,33 @@ class kuro_tables:
                 'keys': ['char_id', 'name', 'texture', 'face', 'model',\
                     'unk0', 'unk_txt0', 'unk_txt1', 'unk1', 'unk_txt2', 'unk_txt3'],\
                 'values': 'nttttnttntt'})
+        elif name == 'ShopInfo' and entry_length == 80:
+            return({'schema': "<4Q2H7f4I", 'sch_len': 80,\
+                'keys': ['id', 'shop_name', 'long1', 'flag', 'empty', 'short1',\
+                    'float1', 'float2', 'float3', 'float4', 'float5', 'float6',\
+                    'float7', 'int1', 'int2', 'int3', 'int4'],\
+                'values': 'ntntnnnnnnnnnnnnn'})
+        elif name == 'ShopItem' and entry_length == 40:
+            return({'schema': "<2HIQ2IQ2I", 'sch_len': 40,\
+                'keys': ['shop_id', 'item_id', 'unknown', 'start_scena_flags',\
+                    'empty1', 'end_scena_flags', 'int2'],\
+                'values': 'nnnbnbn'})
+        elif name == 'ShopTypeDesc' and entry_length == 24:
+            return({'schema': "<2Q8B", 'sch_len': 24,\
+                'keys': ['id', 'flag', 'byte1', 'byte2', 'byte3', 'byte4', 'byte5',\
+                    'byte6', 'byte7', 'byte8'],\
+                'values': 'ntnnnnnnnn'})
+        elif name == 'ShopConv' and entry_length == 36:
+            return({'schema': "<I8f", 'sch_len': 36,\
+                'keys': ['id', 'float1', 'float2', 'float3', 'float4', 'float5',\
+                    'float6', 'float7', 'float8'],\
+                'values': 'nnnnnnnnn'})
+        elif name == 'TradeItem' and entry_length == 52:
+            return({'schema': "<13I", 'sch_len': 52,\
+                'keys': ['item_id', 'trade_item_id1', 'quant1', 'trade_item_id2',\
+                    'quant2', 'trade_item_id3', 'quant3', 'trade_item_id4', 'quant4',\
+                    'trade_item_id5', 'quant5', 'trade_item_id6', 'quant6'],\
+                'values': 'nnnnnnnnnnnnn'})
         else:
             return({})
 
@@ -162,11 +189,17 @@ class kuro_tables:
         return(table)
 
     def read_table(self, table_name):
-        def read_array(offset, numvalues): #u32 only for now
+        def read_array(offset, numvalues): #u32
             arr = []
             f.seek(offset)
             if numvalues > 0:
                 arr.extend(list(struct.unpack("<{}I".format(numvalues), f.read(numvalues*4))))
+            return(arr)
+        def read_short_array(offset, numvalues): #u16
+            arr = []
+            f.seek(offset)
+            if numvalues > 0:
+                arr.extend(list(struct.unpack("<{}H".format(numvalues), f.read(numvalues*2))))
             return(arr)
         def read_null_term_str(offset):
             f.seek(offset)
@@ -184,6 +217,9 @@ class kuro_tables:
                     i += 1
                 elif values[j] == 'a':
                     decoded_data[keys[j]] = read_array(raw_data[i], raw_data[i+1])
+                    i += 2
+                elif values[j] == 'b':
+                    decoded_data[keys[j]] = read_short_array(raw_data[i], raw_data[i+1])
                     i += 2
                 elif values[j] == 't':
                     decoded_data[keys[j]] = read_null_term_str(raw_data[i])
@@ -214,14 +250,16 @@ class kuro_tables:
         return False # Failed to read table properly
 
     def write_table(self, table_name):
-        def write_array(data_list): #u32 only for now
+        def write_array(data_list): #u32
             self.data2_buffer += struct.pack("<{}I".format(len(data_list)), *data_list)
+        def write_short_array(data_list): #u16
+            self.data2_buffer += struct.pack("<{}H".format(len(data_list)), *data_list)
         def write_null_term_str(string):
             self.data2_buffer += string.encode('utf-8') + b'\x00'
         def return_64_len_str(string):
             assert len(string) <= 64
             return(string.encode('utf-8') + b'\x00'*(64-len(string)))
-        def encode_row(raw_data):
+        def encode_row(raw_data, schema_table):
             encoded_data = []
             for key in raw_data:
                 if isinstance(raw_data[key], str):
@@ -229,11 +267,22 @@ class kuro_tables:
                     write_null_term_str(raw_data[key])
                     encoded_data.append(data_offset + self.data2_start_offset)
                 elif isinstance(raw_data[key], list):
-                    #32-bit alignment
-                    while len(self.data2_buffer) % 4 > 0:
-                        self.data2_buffer += b'\x00'
-                    data_offset = len(self.data2_buffer)
-                    write_array(raw_data[key])
+                    data_type = schema_table['values'][schema_table['keys'].index(key)]
+                    if data_type == 'a':
+                        #32-bit alignment
+                        while len(self.data2_buffer) % 4 > 0:
+                            self.data2_buffer += b'\x00'
+                        data_offset = len(self.data2_buffer)
+                        write_array(raw_data[key])
+                    elif data_type == 'b':
+                        #16-bit alignment
+                        while len(self.data2_buffer) % 2 > 0:
+                            self.data2_buffer += b'\x00'
+                        data_offset = len(self.data2_buffer)
+                        write_short_array(raw_data[key])
+                    else:
+                        input("Error, data type \"{}\" is not an array as expected, press Enter to quit!")
+                        raise
                     encoded_data.extend([data_offset + self.data2_start_offset, len(raw_data[key])])
                 else:
                     encoded_data.append(raw_data[key])
@@ -253,8 +302,9 @@ class kuro_tables:
         self.data2_start_offset = offset
         self.data2_buffer = b''
         for key in table:
-            schema = self.get_schema(key, self.schema_dict[key])['schema']
-            new_table += b''.join([struct.pack(schema, *encode_row(x)) for x in table[key]])
+            schema_table = self.get_schema(key, self.schema_dict[key])
+            new_table += b''.join([struct.pack(schema_table['schema'],\
+                *encode_row(x, schema_table)) for x in table[key]])
         assert self.data2_start_offset == len(new_table)
         new_table += self.data2_buffer
         with open(table_name, 'wb') as f:
