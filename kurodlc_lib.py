@@ -38,13 +38,19 @@ class kuro_tables:
 
     def get_schema(self, name, entry_length):
         self.schema_dict[name] = entry_length
-        if name == 'DLCTableData' and entry_length == 88:
+        if name == 'DLCTableData' and entry_length == 88: # Kuro 1
             self.schema_dict[name] = entry_length
             return({'schema': "<2IQ2IQ2I3Q2HIQ2I", 'sch_len': 88,\
                 'keys': ['id', 'sort_id', 'items', 'unk0', 'quantity',\
                     'unk1', 'name', 'desc', 'unk_txt', 'unk2', 'unk3',\
                     'unk4', 'unk_arr', 'unk5'],\
                 'values': 'nnanantttnnnan'})
+        if name == 'DLCTableData' and entry_length == 64: # Kuro 2
+            self.schema_dict[name] = entry_length
+            return({'schema': "<2IQ2IQ2I3Q", 'sch_len': 64,\
+                'keys': ['id', 'sort_id', 'items', 'unk0', 'quantity',\
+                    'unk1', 'name', 'desc', 'unk_txt'],\
+                'values': 'nnananttt'})
         elif name == 'ItemTableData' and entry_length == 248:
             return({'schema': "<2I2Q2BIHI2f20If20I3Q4I", 'sch_len': 248,\
                 'keys': ['id','chr_restrict','flags','unk_txt','category','subcategory',\
@@ -64,6 +70,10 @@ class kuro_tables:
                 'keys': ['id', 'cost_e', 'cost_wa', 'cost_f', 'cost_wi', 'cost_t', 'cost_s', 'cost_m',\
                     'quant_e', 'quant_wa', 'quant_f', 'quant_wi', 'quant_t', 'quant_s', 'quant_m', 'unk0', 'unk1'],\
                 'values': 'nnnnnnnnnnnnnnnnn'})
+        elif name == 'ItemTabType' and entry_length == 12:
+            return({'schema': "<3I", 'sch_len': 12,\
+                'keys': ['id', 'int1', 'int2'],\
+                'values': 'nnn'})
         elif name == 'CostumeParam' and entry_length == 56:
             return({'schema': "<4H2Q2I3Q", 'sch_len': 56,\
                 'keys': ['char_restrict', 'type', 'item_id', 'unk0', 'unk_txt0', 'mdl_name',\
@@ -74,11 +84,17 @@ class kuro_tables:
                 'keys': ['char_id', 'unk0', 'mdl_name', 't0', 't1', 't2', 'r0', 'r1', 'r2',\
                     's0', 's1', 's2', 'unk1'],\
                 'values': 'nntnnnnnnnnnn'})
-        elif name == 'NameTableData' and entry_length == 88:
+        elif name == 'NameTableData' and entry_length == 88: # Kuro 1
             return({'schema': "<11Q", 'sch_len': 88,\
                 'keys': ['char_id', 'name', 'texture', 'face', 'model',\
                     'unk0', 'unk_txt0', 'unk_txt1', 'unk1', 'unk_txt2', 'unk_txt3'],\
                 'values': 'nttttnttntt'})
+        elif name == 'NameTableData' and entry_length == 104: # Kuro 2
+            return({'schema': "<13Q", 'sch_len': 104,\
+                'keys': ['char_id', 'name', 'texture', 'face', 'model',\
+                    'unk0', 'unk_txt0', 'unk1', 'unk_txt1', 'unk2', 'unk_txt2',\
+                    'unk_txt3', 'unk_txt4'],\
+                'values': 'nttttntntnttt'})
         elif name == 'ShopInfo' and entry_length == 80:
             return({'schema': "<4Q2H7f4I", 'sch_len': 80,\
                 'keys': ['id', 'shop_name', 'long1', 'flag', 'empty', 'short1',\
