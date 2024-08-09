@@ -178,9 +178,11 @@ class p3a_class:
             if str(input(p3a_name + " exists! Overwrite? (y/N) ")).lower()[0:1] == 'y':
                 overwrite = True
         if (overwrite == True) or not os.path.exists(p3a_name):
-            file_list = [x.replace('\\','/') for x in glob.glob(folder_name+'/**/*',recursive=True) if not os.path.isdir(x)]
-            assigned_paths = {x:x.removeprefix(folder_name+'/') for x in file_list}
-            p3a_data = self.p3a_pack_files (file_list, assigned_paths, cmp_type = cmp_type, p3a_ver = p3a_ver)
+            file_list = [x.replace('\\','/') for x in glob.glob('**/*',root_dir=folder_name,recursive=True)
+                if not os.path.isdir(folder_name+'/'+x)]
+            assigned_paths = {folder_name+'/'+x:x for x in file_list}
+            p3a_data = self.p3a_pack_files (list(assigned_paths.keys()), assigned_paths,
+                cmp_type = cmp_type, p3a_ver = p3a_ver)
             with open(p3a_name, 'wb') as f:
                 f.write(p3a_data)
         return
