@@ -44,13 +44,13 @@ class kuro_tables:
                 'keys': ['id', 'sort_id', 'items', 'unk0', 'quantity',\
                     'unk1', 'name', 'desc', 'unk_txt', 'unk2', 'unk3',\
                     'unk4', 'unk_arr', 'unk5'],\
-                'values': 'nnanantttnnnan'})
+                'values': 'nnanantttnnnan', 'primary_key': 'id'})
         if name == 'DLCTableData' and entry_length == 64: # Kuro 2
             self.schema_dict[name] = entry_length
             return({'schema': "<2IQ2IQ2I3Q", 'sch_len': 64,\
                 'keys': ['id', 'sort_id', 'items', 'unk0', 'quantity',\
                     'unk1', 'name', 'desc', 'unk_txt'],\
-                'values': 'nnananttt'})
+                'values': 'nnananttt', 'primary_key': 'id'})
         elif name == 'ItemTableData' and entry_length == 248:
             return({'schema': "<2I2Q2BIHI2f20If20I3Q4I", 'sch_len': 248,\
                 'keys': ['id','chr_restrict','flags','unk_txt','category','subcategory',\
@@ -60,20 +60,21 @@ class kuro_tables:
                     'unk5','hp','ep','patk','pdef','matk','mdef','str','def','ats','adf','agl',\
                     'dex','hit','eva','meva','crit','spd','mov','stack_size','price','anim',\
                     'name','desc','unk6','unk7','unk8','unk9'],\
-                'values': 'nnttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttnnnn'})
+                'values': 'nnttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttnnnn',\
+                'primary_key': 'id'})
         elif name == 'ItemKindParam2' and entry_length == 16:
             return({'schema': "<2Q", 'sch_len': 16,\
                 'keys': ['id', 'value'],\
-                'values': 'nt'})
+                'values': 'nt', 'primary_key': 'id'})
         elif name == 'QuartzParam' and entry_length == 28:
             return({'schema': "<8H8BI", 'sch_len': 28,\
                 'keys': ['id', 'cost_e', 'cost_wa', 'cost_f', 'cost_wi', 'cost_t', 'cost_s', 'cost_m',\
                     'quant_e', 'quant_wa', 'quant_f', 'quant_wi', 'quant_t', 'quant_s', 'quant_m', 'unk0', 'unk1'],\
-                'values': 'nnnnnnnnnnnnnnnnn'})
+                'values': 'nnnnnnnnnnnnnnnnn', 'primary_key': 'id'})
         elif name == 'ItemTabType' and entry_length == 12:
             return({'schema': "<3I", 'sch_len': 12,\
                 'keys': ['id', 'int1', 'int2'],\
-                'values': 'nnn'})
+                'values': 'nnn', 'primary_key': 'id'})
         elif name == 'CostumeParam' and entry_length == 56:
             return({'schema': "<4H2Q2I3Q", 'sch_len': 56,\
                 'keys': ['char_restrict', 'type', 'item_id', 'unk0', 'unk_txt0', 'mdl_name',\
@@ -193,7 +194,7 @@ class kuro_tables:
         return
 
     def read_all_kurodlc_jsons(self):
-        kurodlc_jsons = glob.glob('*.kurodlc.json')
+        kurodlc_jsons = sorted(glob.glob('*.kurodlc.json'))
         for i in range(len(kurodlc_jsons)):
             self.read_kurodlc_json(kurodlc_jsons[i])
         return
@@ -202,6 +203,11 @@ class kuro_tables:
         for key in table:
             if key in self.new_entries:
                 table[key].extend(self.new_entries[key])
+                #For tables with primary keys, cull old entries by primary key if new one supercedes them
+                schema = self.get_schema(key, self.schema_dict[key])
+                if 'primary_key' in schema:
+                    primary_key = schema['primary_key']
+                    table[key] = list({table[key][i][primary_key]:table[key][i] for i in range(len(table[key]))}.values())
         return(table)
 
     def read_table(self, table_name):
