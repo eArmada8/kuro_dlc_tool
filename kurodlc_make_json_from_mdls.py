@@ -33,11 +33,11 @@ class dlc_table_maker:
                 dlc_details['id'] = int(dlc_id_raw)
             except ValueError:
                 print("Invalid entry!")
-        while 'sort_id' not in dlc_details.keys():
+        if 'sort_id' not in dlc_details.keys():
             dlc_details['sort_id'] = dlc_details['id']
-        while 'unk0' not in dlc_details.keys():
+        if 'unk0' not in dlc_details.keys():
             dlc_details['unk0'] = 0
-        while 'unk1' not in dlc_details.keys():
+        if 'unk1' not in dlc_details.keys():
             dlc_details['unk1'] = 0
         while 'dlc_name' not in dlc_details.keys() or dlc_details['dlc_name'] == '':
             dlc_details['dlc_name'] = str(input("DLC Name: ")).encode('utf-8').decode('utf-8')
@@ -48,17 +48,17 @@ class dlc_table_maker:
             json_name = input("Please input name for .kurodlc.json file (e.g. \"my_mod\" for \"my_mod.kurodlc.json\") ")
             valid = '-_.[]() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
             dlc_details['dlc_filename'] = ''.join([x if x in valid else '_' for x in json_name])
-        while 'unk_txt' not in dlc_details.keys():
+        if 'unk_txt' not in dlc_details.keys():
             dlc_details['unk_txt'] = ''
-        while 'unk2' not in dlc_details.keys():
+        if 'unk2' not in dlc_details.keys():
             dlc_details['unk2'] = 0
-        while 'unk3' not in dlc_details.keys():
+        if 'unk3' not in dlc_details.keys():
             dlc_details['unk3'] = 1
-        while 'unk4' not in dlc_details.keys():
+        if 'unk4' not in dlc_details.keys():
             dlc_details['unk4'] = 0
-        while 'unk_arr' not in dlc_details.keys():
+        if 'unk_arr' not in dlc_details.keys():
             dlc_details['unk_arr'] = []
-        while 'unk5' not in dlc_details.keys():
+        if 'unk5' not in dlc_details.keys():
             dlc_details['unk5'] = 0
         self.kt.write_struct_to_json(dlc_details, 'dlc.json')
         return(dlc_details)
@@ -134,7 +134,7 @@ class dlc_table_maker:
                             print("Invalid entry!")
                     except ValueError:
                         print("Invalid entry!")
-            while 'subcategory' not in mdl_details.keys() or mdl_details['subcategory'] not in [15,17]:
+            if 'subcategory' not in mdl_details.keys() or mdl_details['subcategory'] not in [15,17]:
                 mdl_details['subcategory'] = {17:15, 18:15, 19:15, 24:17}[mdl_details['category']]
             while 'attach_name' not in mdl_details.keys()\
                     or (mdl_details['attach_name'] == '' and mdl_details['category'] == 19):
@@ -142,7 +142,7 @@ class dlc_table_maker:
                     mdl_details['attach_name'] = str(input("Attach point for {0}: (e.g. Head_Point - check model .json file for valid options)  ".format(models[i]))).encode('utf-8').decode('utf-8')
                 else:
                     mdl_details['attach_name'] = ''
-            while 'attach_txt1' not in mdl_details.keys():
+            if 'attach_txt1' not in mdl_details.keys():
                 mdl_details['attach_txt1'] = {17:'', 18:'', 19:'hold', 24:''}[mdl_details['category']]
             while 'chr_restrict' not in mdl_details.keys() or mdl_details['chr_restrict'] == 0x1FFFFFFF:
                 mdl_details['chr_restrict'] = self.get_chr_id(models[i])
@@ -178,7 +178,8 @@ class dlc_table_maker:
                     except ValueError:
                         print("Invalid entry!")
             while 'stores' not in mdl_details.keys():
-                store_opt = input("Would you like to add this item to a store? (y/N) ")[0].lower()
+                store_opt_raw = input("Would you like to add this item to a store? (y/N) ")
+                store_opt = store_opt_raw[0].lower() if len(store_opt_raw) > 0 else 'N'
                 if store_opt == 'y':
                     if os.path.exists('t_shop.tbl') or os.path.exists('t_shop.tbl.original'):
                         if os.path.exists('t_shop.tbl'):
@@ -202,121 +203,121 @@ class dlc_table_maker:
                         print("Invalid input, please enter store IDs separated by spaces! e.g. 20 21 22")
                 else:
                     mdl_details['stores'] = []
-            while 'flags' not in mdl_details.keys():
+            if 'flags' not in mdl_details.keys():
                 mdl_details['flags'] = ''
-            while 'unk_txt' not in mdl_details.keys() or mdl_details['unk_txt'] == '':
+            if 'unk_txt' not in mdl_details.keys():
                 mdl_details['unk_txt'] = {17:'1', 18:'1', 19:'', 24:'1'}[mdl_details['category']]
-            while 'unk0' not in mdl_details.keys() or mdl_details['unk0'] == '':
+            if 'unk0' not in mdl_details.keys() or mdl_details['unk0'] == '':
                 mdl_details['unk0'] = 0
-            while 'unk1' not in mdl_details.keys() or mdl_details['unk1'] == '':
+            if 'unk1' not in mdl_details.keys() or mdl_details['unk1'] == '':
                 mdl_details['unk1'] = 0
-            while 'unk2' not in mdl_details.keys() or mdl_details['unk2'] == '':
+            if 'unk2' not in mdl_details.keys() or mdl_details['unk2'] == '':
                 mdl_details['unk2'] = 0
-            while 'unk3' not in mdl_details.keys() or mdl_details['unk3'] == '':
+            if 'unk3' not in mdl_details.keys() or mdl_details['unk3'] == '':
                 mdl_details['unk3'] = 0
-            while 'unk4' not in mdl_details.keys() or mdl_details['unk4'] == '':
+            if 'unk4' not in mdl_details.keys() or mdl_details['unk4'] == '':
                 mdl_details['unk4'] = 0
-            while 'eff1_id' not in mdl_details.keys() or mdl_details['eff1_id'] == '':
+            if 'eff1_id' not in mdl_details.keys() or mdl_details['eff1_id'] == '':
                 mdl_details['eff1_id'] = 0
-            while 'eff1_0' not in mdl_details.keys() or mdl_details['eff1_0'] == '':
+            if 'eff1_0' not in mdl_details.keys() or mdl_details['eff1_0'] == '':
                 mdl_details['eff1_0'] = 0
-            while 'eff1_1' not in mdl_details.keys() or mdl_details['eff1_1'] == '':
+            if 'eff1_1' not in mdl_details.keys() or mdl_details['eff1_1'] == '':
                 mdl_details['eff1_1'] = 0
-            while 'eff1_2' not in mdl_details.keys() or mdl_details['eff1_2'] == '':
+            if 'eff1_2' not in mdl_details.keys() or mdl_details['eff1_2'] == '':
                 mdl_details['eff1_2'] = 0
-            while 'eff2_id' not in mdl_details.keys() or mdl_details['eff2_id'] == '':
+            if 'eff2_id' not in mdl_details.keys() or mdl_details['eff2_id'] == '':
                 mdl_details['eff2_id'] = 0
-            while 'eff2_0' not in mdl_details.keys() or mdl_details['eff2_0'] == '':
+            if 'eff2_0' not in mdl_details.keys() or mdl_details['eff2_0'] == '':
                 mdl_details['eff2_0'] = 0
-            while 'eff2_1' not in mdl_details.keys() or mdl_details['eff2_1'] == '':
+            if 'eff2_1' not in mdl_details.keys() or mdl_details['eff2_1'] == '':
                 mdl_details['eff2_1'] = 0
-            while 'eff2_2' not in mdl_details.keys() or mdl_details['eff2_2'] == '':
+            if 'eff2_2' not in mdl_details.keys() or mdl_details['eff2_2'] == '':
                 mdl_details['eff2_2'] = 0
-            while 'eff3_id' not in mdl_details.keys() or mdl_details['eff3_id'] == '':
+            if 'eff3_id' not in mdl_details.keys() or mdl_details['eff3_id'] == '':
                 mdl_details['eff3_id'] = 0
-            while 'eff3_0' not in mdl_details.keys() or mdl_details['eff3_0'] == '':
+            if 'eff3_0' not in mdl_details.keys() or mdl_details['eff3_0'] == '':
                 mdl_details['eff3_0'] = 0
-            while 'eff3_1' not in mdl_details.keys() or mdl_details['eff3_1'] == '':
+            if 'eff3_1' not in mdl_details.keys() or mdl_details['eff3_1'] == '':
                 mdl_details['eff3_1'] = 0
-            while 'eff3_2' not in mdl_details.keys() or mdl_details['eff3_2'] == '':
+            if 'eff3_2' not in mdl_details.keys() or mdl_details['eff3_2'] == '':
                 mdl_details['eff3_2'] = 0
-            while 'eff4_id' not in mdl_details.keys() or mdl_details['eff4_id'] == '':
+            if 'eff4_id' not in mdl_details.keys() or mdl_details['eff4_id'] == '':
                 mdl_details['eff4_id'] = 0
-            while 'eff4_0' not in mdl_details.keys() or mdl_details['eff4_0'] == '':
+            if 'eff4_0' not in mdl_details.keys() or mdl_details['eff4_0'] == '':
                 mdl_details['eff4_0'] = 0
-            while 'eff4_1' not in mdl_details.keys() or mdl_details['eff4_1'] == '':
+            if 'eff4_1' not in mdl_details.keys() or mdl_details['eff4_1'] == '':
                 mdl_details['eff4_1'] = 0
-            while 'eff4_2' not in mdl_details.keys() or mdl_details['eff4_2'] == '':
+            if 'eff4_2' not in mdl_details.keys() or mdl_details['eff4_2'] == '':
                 mdl_details['eff4_2'] = 0
-            while 'eff5_id' not in mdl_details.keys() or mdl_details['eff5_id'] == '':
+            if 'eff5_id' not in mdl_details.keys() or mdl_details['eff5_id'] == '':
                 mdl_details['eff5_id'] = 0
-            while 'eff5_0' not in mdl_details.keys() or mdl_details['eff5_0'] == '':
+            if 'eff5_0' not in mdl_details.keys() or mdl_details['eff5_0'] == '':
                 mdl_details['eff5_0'] = 0
-            while 'eff5_1' not in mdl_details.keys() or mdl_details['eff5_1'] == '':
+            if 'eff5_1' not in mdl_details.keys() or mdl_details['eff5_1'] == '':
                 mdl_details['eff5_1'] = 0
-            while 'eff5_2' not in mdl_details.keys() or mdl_details['eff5_2'] == '':
+            if 'eff5_2' not in mdl_details.keys() or mdl_details['eff5_2'] == '':
                 mdl_details['eff5_2'] = 0
-            while 'unk5' not in mdl_details.keys() or mdl_details['unk5'] == '':
+            if 'unk5' not in mdl_details.keys() or mdl_details['unk5'] == '':
                 mdl_details['unk5'] = 0
-            while 'hp' not in mdl_details.keys() or mdl_details['hp'] == '':
+            if 'hp' not in mdl_details.keys() or mdl_details['hp'] == '':
                 mdl_details['hp'] = 0
-            while 'ep' not in mdl_details.keys() or mdl_details['ep'] == '':
+            if 'ep' not in mdl_details.keys() or mdl_details['ep'] == '':
                 mdl_details['ep'] = 0
-            while 'patk' not in mdl_details.keys() or mdl_details['patk'] == '':
+            if 'patk' not in mdl_details.keys() or mdl_details['patk'] == '':
                 mdl_details['patk'] = 0
-            while 'pdef' not in mdl_details.keys() or mdl_details['pdef'] == '':
+            if 'pdef' not in mdl_details.keys() or mdl_details['pdef'] == '':
                 mdl_details['pdef'] = 0
-            while 'matk' not in mdl_details.keys() or mdl_details['matk'] == '':
+            if 'matk' not in mdl_details.keys() or mdl_details['matk'] == '':
                 mdl_details['matk'] = 0
-            while 'mdef' not in mdl_details.keys() or mdl_details['mdef'] == '':
+            if 'mdef' not in mdl_details.keys() or mdl_details['mdef'] == '':
                 mdl_details['mdef'] = 0
-            while 'str' not in mdl_details.keys() or mdl_details['str'] == '':
+            if 'str' not in mdl_details.keys() or mdl_details['str'] == '':
                 mdl_details['str'] = 0
-            while 'def' not in mdl_details.keys() or mdl_details['def'] == '':
+            if 'def' not in mdl_details.keys() or mdl_details['def'] == '':
                 mdl_details['def'] = 0
-            while 'ats' not in mdl_details.keys() or mdl_details['ats'] == '':
+            if 'ats' not in mdl_details.keys() or mdl_details['ats'] == '':
                 mdl_details['ats'] = 0
-            while 'adf' not in mdl_details.keys() or mdl_details['adf'] == '':
+            if 'adf' not in mdl_details.keys() or mdl_details['adf'] == '':
                 mdl_details['adf'] = 0
-            while 'agl' not in mdl_details.keys() or mdl_details['agl'] == '':
+            if 'agl' not in mdl_details.keys() or mdl_details['agl'] == '':
                 mdl_details['agl'] = 0
-            while 'dex' not in mdl_details.keys() or mdl_details['dex'] == '':
+            if 'dex' not in mdl_details.keys() or mdl_details['dex'] == '':
                 mdl_details['dex'] = 0
-            while 'hit' not in mdl_details.keys() or mdl_details['hit'] == '':
+            if 'hit' not in mdl_details.keys() or mdl_details['hit'] == '':
                 mdl_details['hit'] = 0
-            while 'eva' not in mdl_details.keys() or mdl_details['eva'] == '':
+            if 'eva' not in mdl_details.keys() or mdl_details['eva'] == '':
                 mdl_details['eva'] = 0
-            while 'meva' not in mdl_details.keys() or mdl_details['meva'] == '':
+            if 'meva' not in mdl_details.keys() or mdl_details['meva'] == '':
                 mdl_details['meva'] = 0
-            while 'crit' not in mdl_details.keys() or mdl_details['crit'] == '':
+            if 'crit' not in mdl_details.keys() or mdl_details['crit'] == '':
                 mdl_details['crit'] = 0
-            while 'spd' not in mdl_details.keys() or mdl_details['spd'] == '':
+            if 'spd' not in mdl_details.keys() or mdl_details['spd'] == '':
                 mdl_details['spd'] = 0
-            while 'mov' not in mdl_details.keys() or mdl_details['mov'] == '':
+            if 'mov' not in mdl_details.keys() or mdl_details['mov'] == '':
                 mdl_details['mov'] = 0
-            while 'stack_size' not in mdl_details.keys() or mdl_details['stack_size'] == '':
+            if 'stack_size' not in mdl_details.keys() or mdl_details['stack_size'] == '':
                 mdl_details['stack_size'] = {17:1, 18:1, 19:8, 24:1}[mdl_details['category']]
-            while 'price' not in mdl_details.keys() or mdl_details['price'] == '':
+            if 'price' not in mdl_details.keys() or mdl_details['price'] == '':
                 mdl_details['price'] = 100
-            while 'anim' not in mdl_details.keys():
+            if 'anim' not in mdl_details.keys():
                 mdl_details['anim'] = ''
-            while 'unk6' not in mdl_details.keys() or mdl_details['unk6'] == '':
+            if 'unk6' not in mdl_details.keys() or mdl_details['unk6'] == '':
                 mdl_details['unk6'] = 0
-            while 'unk7' not in mdl_details.keys() or mdl_details['unk7'] == '':
+            if 'unk7' not in mdl_details.keys() or mdl_details['unk7'] == '':
                 mdl_details['unk7'] = 0
-            while 'unk8' not in mdl_details.keys() or mdl_details['unk8'] == '':
+            if 'unk8' not in mdl_details.keys() or mdl_details['unk8'] == '':
                 mdl_details['unk8'] = 0
-            while 'unk9' not in mdl_details.keys() or mdl_details['unk9'] == '':
+            if 'unk9' not in mdl_details.keys() or mdl_details['unk9'] == '':
                 mdl_details['unk9'] = 0
-            while 'attach_unk0' not in mdl_details.keys() or mdl_details['attach_unk0'] == '':
+            if 'attach_unk0' not in mdl_details.keys() or mdl_details['attach_unk0'] == '':
                 mdl_details['attach_unk0'] = 0
-            while 'attach_txt0' not in mdl_details.keys():
+            if 'attach_txt0' not in mdl_details.keys():
                 mdl_details['attach_txt0'] = ''
-            while 'attach_unk1' not in mdl_details.keys() or mdl_details['attach_unk1'] == '':
+            if 'attach_unk1' not in mdl_details.keys() or mdl_details['attach_unk1'] == '':
                 mdl_details['attach_unk1'] = 0
-            while 'attach_unk2' not in mdl_details.keys() or mdl_details['attach_unk2'] == '':
+            if 'attach_unk2' not in mdl_details.keys() or mdl_details['attach_unk2'] == '':
                 mdl_details['attach_unk2'] = 0
-            while 'attach_txt2' not in mdl_details.keys():
+            if 'attach_txt2' not in mdl_details.keys():
                 mdl_details['attach_txt2'] = ''
             mdl_dict[models[i]] = mdl_details
             if mdl_details['id'] not in list(existing_items.keys()):
