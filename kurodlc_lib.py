@@ -146,7 +146,7 @@ class kuro_tables:
 
     # Schema must already be loaded by reading the original tables
     def validate_kurodlc_entries(self, json_data, json_name):
-        for key in json_data:
+        for key in [x for x in json_data if len(json_data[x]) > 0]:
             if key in self.schema_dict:
                 schema = self.get_schema(key, self.schema_dict[key])
                 if not all([list(json_data[key][i].keys()) == schema['keys']\
@@ -161,21 +161,25 @@ class kuro_tables:
                         input("Invalid or missing keys, auto-correction not possible.")
                         raise
                 pass_value_validation = True
+                problem_keys = []
                 for i in range(len(schema['values'])):
                     if schema['values'][i] == 'n':
                         if not all([isinstance(json_data[key][j][schema['keys'][i]], int)\
                                 or isinstance(json_data[key][j][schema['keys'][i]], float) for j in range(len(json_data[key]))]):
+                            problem_keys.append(schema['keys'][i])
                             pass_value_validation = False
                     elif schema['values'][i] == 'a':
                         if not all([isinstance(json_data[key][j][schema['keys'][i]], list)\
                                 and all([isinstance(k, int) for k in json_data[key][j][schema['keys'][i]]])\
                                 for j in range(len(json_data[key]))]):
+                            problem_keys.append(schema['keys'][i])
                             pass_value_validation = False
                     elif schema['values'][i] == 't':
                         if not all([isinstance(json_data[key][j][schema['keys'][i]], str) for j in range(len(json_data[key]))]):
+                            problem_keys.append(schema['keys'][i])
                             pass_value_validation = False
                 if pass_value_validation == False:
-                    input("Validation of {0} failed, one or more values in {1} do not match the schema!".format(json_name, key))
+                    input("Validation of {0} failed, values {1} in {2} do not match the schema!".format(json_name, problem_keys, key))
                     raise
             else:
                 input("Validation of {0} in {1} failed, schema not found! (tbl file missing)".format(key, json_name))
