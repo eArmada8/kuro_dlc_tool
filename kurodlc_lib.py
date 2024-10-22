@@ -87,12 +87,12 @@ class kuro_tables:
                 'values': 'nntnnnnnnnnnn'})
         elif name == 'NameTableData' and entry_length == 88: # Kuro 1
             return({'schema': "<11Q", 'sch_len': 88,\
-                'keys': ['char_id', 'name', 'texture', 'face', 'model',\
+                'keys': ['char_id', 'name', 'model', 'face', 'texture',\
                     'unk0', 'unk_txt0', 'unk_txt1', 'unk1', 'unk_txt2', 'unk_txt3'],\
                 'values': 'nttttnttntt'})
         elif name == 'NameTableData' and entry_length == 104: # Kuro 2
             return({'schema': "<13Q", 'sch_len': 104,\
-                'keys': ['char_id', 'name', 'texture', 'face', 'model',\
+                'keys': ['char_id', 'name', 'model', 'face', 'texture',\
                     'unk0', 'unk_txt0', 'unk1', 'unk_txt1', 'unk2', 'unk_txt2',\
                     'unk_txt3', 'unk_txt4'],\
                 'values': 'nttttntntnttt'})
