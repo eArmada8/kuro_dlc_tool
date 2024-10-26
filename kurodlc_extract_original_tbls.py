@@ -41,10 +41,11 @@ def extract_original_tbls_from_p3a (original_p3a_filename):
                         entries_to_extract.append(matching_entries[choice])
                     else:
                         entries_to_extract.append(matching_entries[0])
+            print("files: {}".format([x['name'] for x in entries_to_extract]))
             for i in range(len(entries_to_extract)):
                 file_data = p3a.read_file(entries_to_extract[i], p3a_dict)
                 if len(file_data) > 0:
-                    with open(filenames[i], 'wb') as f2:
+                    with open(filenames[files_to_extract.index(os.path.basename(entries_to_extract[i]['name']))], 'wb') as f2:
                         f2.write(file_data)
 
 if __name__ == "__main__":

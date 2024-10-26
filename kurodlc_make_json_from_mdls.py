@@ -207,8 +207,9 @@ class dlc_table_maker:
             while 'desc' not in mdl_details.keys() or mdl_details['desc'] == '':
                 mdl_details['desc'] = str(input("Item Description for {0}: ".format(models[i]))).encode('utf-8').decode('utf-8')
                 mdl_details['desc'] = mdl_details['desc'].replace('\\n','\n') # Allow newlines
-            while 'short_desc' not in mdl_details.keys() or mdl_details['short_desc'] == '':
-                mdl_details['short_desc'] = str(input("Item Short Description for {0}: ".format(models[i]))).encode('utf-8').decode('utf-8')
+            if self.game_type == 'ys_x':
+                while 'short_desc' not in mdl_details.keys() or mdl_details['short_desc'] == '':
+                    mdl_details['short_desc'] = str(input("Item Short Description for {0}: ".format(models[i]))).encode('utf-8').decode('utf-8')
             while 'item_quantity' not in mdl_details.keys():
                 item_quant_raw = input("How many should be included in the DLC? [Leave blank for 1] ".format(models[i]))
                 if item_quant_raw == '':
