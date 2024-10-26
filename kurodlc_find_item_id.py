@@ -35,8 +35,12 @@ if __name__ == "__main__":
     t_item = kt.update_table_with_kurodlc(t_item)
     items = {x['id']:x['name'] for x in t_item['ItemTableData']}
 
-    # Dunno what the actual upper limit of item IDs is
-    id_lower_limit, id_upper_limit = 1, 5000
+    if kt.schema_dict['ItemTableData'] == 176: # Ys X
+        # Dunno what the actual upper limit of item IDs is
+        id_lower_limit, id_upper_limit = 1, 60000
+    else: # Kuro 1 / 2
+        # Dunno what the actual upper limit of item IDs is
+        id_lower_limit, id_upper_limit = 1, 5000
     available_ids = [i for i in range(id_lower_limit,id_upper_limit) if not i in items.keys()]
     random.shuffle(available_ids)
     print("The current range of ID numbers is {0} to {1}.".format(min(items.keys()), max(items.keys())))

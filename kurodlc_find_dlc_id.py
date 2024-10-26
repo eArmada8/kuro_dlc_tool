@@ -33,10 +33,16 @@ if __name__ == "__main__":
     # Read *.kurodlc.json files and add to table (in memory)
     kt.read_all_kurodlc_jsons()
     t_dlc = kt.update_table_with_kurodlc(t_dlc)
-    dlcs = {x['id']:x['name'] for x in t_dlc['DLCTableData']}
+    
+    if 'DLCTable' in kt.schema_dict: # Ys X
+        dlcs = {x['id']:x['name'] for x in t_dlc['DLCTable']}
+        # Dunno what the actual upper limit of DLC IDs is
+        id_lower_limit, id_upper_limit = 0, 350
+    else: # Kuro 1 / 2
+        dlcs = {x['id']:x['name'] for x in t_dlc['DLCTableData']}
+        # Dunno what the actual upper limit of DLC IDs is
+        id_lower_limit, id_upper_limit = 0, 350
 
-    # Dunno what the actual upper limit of DLC IDs is
-    id_lower_limit, id_upper_limit = 0, 350
     available_ids = [i for i in range(id_lower_limit,id_upper_limit) if not i in dlcs.keys()]
     random.shuffle(available_ids)
     print("The current range of ID numbers is {0} to {1}.".format(min(dlcs.keys()), max(dlcs.keys())))

@@ -1,6 +1,6 @@
 # Trails through Daybreak DLC table maker for custom costumes
 
-This is a small collection of scripts to write t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) for making costume mods in Trails through Daybreak NIS America release.  Other platforms / CLE releases are not tested, so YMMV.
+This is a small collection of scripts to write t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) for making costume mods in Trails through Daybreak NIS America release (PC) and Ys X NIS America release (PC).  The making of tables in Kuro no Kiseki II CLE (PC) release has been tested, although not extensively.  Other platforms / CLE releases are not tested, so YMMV.
 
 ## Credits
 
@@ -20,12 +20,15 @@ This tool was written using the schemas provided in KuroTools, and has thus bene
 Before you start, you will want to determine some information:
 1. DLC ID number:  I recommend keeping the number <350, but be sure to use a number that isn't already in use.
 2. Item ID numbers:  You need to choose item numbers that are valid, but are not already in the game.
+3. Recipe ID numbers - *Ys-only*:  You need to choose item numbers that are valid, but are not already in the game.
 
-You can use `kurodlc_find_dlc_id.py` and `kurodlc_find_item_id.py` to check for unused ID numbers.  Place the original t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) in the folder (if they are already renamed to t_costume.tbl.original, t_dlc.tbl.original, t_item.tbl.original, and t_shop.tbl.original, that is fine).  Run the scripts and they will tell you roughly what numbers are in use.  The easiest is to pick something slightly above the upper number, but do not go too high or the game will not accept the numbers.
+You can use `kurodlc_find_dlc_id.py`, `kurodlc_find_item_id.py` and `kurodlc_find_recipe_id.py` to check for unused ID numbers.  Place the original t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl, and t_recipe.tbl {*Ys only*}) in the folder (if they are already renamed to t_costume.tbl.original, t_dlc.tbl.original, t_item.tbl.original, t_recipe.tbl.original, and t_shop.tbl.original, that is fine).  Run the scripts and they will tell you roughly what numbers are in use.  The easiest is to pick something slightly above the upper number, but do not go too high or the game will not accept the numbers.
 
 Place all your .mdl files in a folder, and put `kurodlc_make_json_from_mdls.py` and t_name.tbl files in the same folder.  Run `kurodlc_make_json_from_mdls.py`.  If there are .json files with settings, the script will just make the .kurodlc.json file, but the first time you run it (assuming you did not make the .json files by hand) it will ask you questions.
 
 Questions it will ask you:
+* Game platform:
+    1. Pick Kuro (Daybreak) or Ys X
 * DLC options:
 	1. DLC ID:  This number you determined above.
 	2. DLC Name:  The name of the DLC that the user will see in the DLC menu
@@ -39,6 +42,7 @@ Questions it will ask you:
 	6. Item Description:  The description of the item that the user will see in the item / costume menus
 	7. Item Quantity:  How many of this item should be given to the player by the DLC.
 	8. Shop IDs:  (optional) Shop IDs of any shops you would like this item to be purchaseable from.
+	9. Recipe ID:  (optional, *Ys only*) Shops in Ys X require a recipe to sell items.  You only need one recipe ID per item.
 
 Once you have answered all the questions, it will generate the .kurodoc.json file to be used with `kurodlc_make_tbls.py`.  It will also generate a dlc.json file saving all the DLC options, and a .json file for each .mdl.  Running the script again, the tables will be generated without any questions.  If you want to change any of the data, edit the .json with a text editor, or simply delete the .json file.  If you just delete the file you want to change, the script will still use the other .json files it finds.
 
@@ -58,7 +62,7 @@ This script can also be used for updating / replacing entries.  Many table secti
 
 ### kurodlc_make_zzz_tbls.py
 
-This is the script for end users to combine mods into a single set of tables.
+This is the script for end users to combine mods into a single set of tables.  *Daybreak NISA only, all other games please use kurodlc_make_tbls.py*
 
 Put this script in a folder with scripts_en.p3a (or scripts.p3a if you want the Japanese tables) and all the .kurodlc.json files you want to combine, as well as kurodlc_lib.py and p3a_lib.py.  Run the script and it will create zzz_combined_tables.p3a, which should be put along with all the mods into the /mods folder of your Trails Through Daybreak installation folder.
 
