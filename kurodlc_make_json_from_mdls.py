@@ -555,10 +555,11 @@ class dlc_table_maker:
         if self.game_type == 'kuro':
             pass # Not used for Kuro
         elif self.game_type == 'ys_x':
-            recipe_entries.append({"recipe_id": mdl_data['recipe_id'], "unk0": 0,\
-                "item_id": mdl_data['id'], "mat1_id": 2051, "mat1_quant": 0, "mat2_id": 0,\
-                "mat2_quant": 0, "mat3_id": 0, "mat3_quant": 0, "mat4_id": 0, "mat4_quant": 0,\
-                "mat5_id": 0, "mat5_quant": 0, "mat6_id": 0, "mat6_quant": 0})
+            if 'recipe_id' in mdl_data:
+                recipe_entries.append({"recipe_id": mdl_data['recipe_id'], "unk0": 0,\
+                    "item_id": mdl_data['id'], "mat1_id": 2051, "mat1_quant": 0, "mat2_id": 0,\
+                    "mat2_quant": 0, "mat3_id": 0, "mat3_quant": 0, "mat4_id": 0, "mat4_quant": 0,\
+                    "mat5_id": 0, "mat5_quant": 0, "mat6_id": 0, "mat6_quant": 0})
         else:
             self.invalid_game_type() #probably ok to pass here, but this is for script debugging
         return(recipe_entries)
