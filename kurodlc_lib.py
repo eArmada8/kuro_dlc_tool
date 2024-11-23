@@ -17,6 +17,7 @@ class kuro_tables:
         self.data2_start_offset = 0
         self.data2_buffer = b''
         self.new_entries = {}
+        self.new_entries_sources = {}
         self.init_schemas()
 
     def init_schemas(self):
@@ -97,7 +98,7 @@ class kuro_tables:
             return({'schema': "<4H2Q2I3Q", 'sch_len': 56,\
                 'keys': ['char_restrict', 'type', 'item_id', 'unk0', 'unk_txt0', 'mdl_name',\
                     'unk1', 'unk2', 'attach_name', 'unk_txt1', 'unk_txt2'],\
-                'values': 'nnnnttnnttt'})
+                'values': 'nnnnttnnttt', 'primary_key': 'item_id', 'unique_values': ['mdl_name']})
         elif name == 'CostumeAttachOffset' and entry_length == 56: # Kuro 1 / 2
             return({'schema': "<2IQ10f", 'sch_len': 56,\
                 'keys': ['char_id', 'unk0', 'mdl_name', 't0', 't1', 't2', 'r0', 'r1', 'r2',\
@@ -106,17 +107,17 @@ class kuro_tables:
         elif name == 'CostumeTable' and entry_length == 24: # Ys X
             return({'schema': "<2I2Q", 'sch_len': 24,\
                 'keys': ['character_id', 'item_id', 'base_model', 'costume_model'],\
-                'values': 'nntt'})
+                'values': 'nntt', 'primary_key': 'item_id', 'unique_values': ['costume_model']})
         elif name == 'CostumeAttachTable' and entry_length == 80: # Ys X
             return({'schema': "<2I2i8Q", 'sch_len': 80,\
                 'keys': ['character_id', 'unk0', 'item_id', 'unk1', 'base_model',\
                 'equip_model', 'attach_point', 'unk_text0', 'unk_text1',
                 'unk_text2', 'unk_text3', 'unk_text4'],\
-                'values': 'nnnntttttttt'})
+                'values': 'nnnntttttttt', 'primary_key': 'item_id', 'unique_values': ['equip_model']})
         elif name == 'CostumeMaterialTable' and entry_length == 24: # Ys X
             return({'schema': "<2I2Q", 'sch_len': 24,\
                 'keys': ['character_id', 'item_id', 'base_model', 'equip_model'],\
-                'values': 'nntt'})
+                'values': 'nntt', 'primary_key': 'item_id', 'unique_values': ['equip_model']})
         elif name == 'CostumeUIFaceTable' and entry_length == 48: # Ys X
             return({'schema': "<Ii2IQ2IQ2I", 'sch_len': 48,\
                 'keys': ['character_id', 'unk0', 'unk1', 'unk2', 'unk_array0',\
@@ -185,7 +186,7 @@ class kuro_tables:
                 'keys': ['recipe_id', 'unk0', 'item_id', 'mat1_id', 'mat1_quant',\
                 'mat2_id', 'mat2_quant', 'mat3_id', 'mat3_quant', 'mat4_id', 'mat4_quant',\
                 'mat5_id', 'mat5_quant', 'mat6_id', 'mat6_quant'],\
-                'values': 'nnnnnnnnnnnnnnn'})
+                'values': 'nnnnnnnnnnnnnnn', 'primary_key': 'recipe_id'})
         else:
             return({})
 
@@ -249,10 +250,64 @@ class kuro_tables:
                 raise
         return(json_data)
 
+    def detect_duplicate_entries(self, json_data, json_name):
+        for key in [x for x in json_data if len(json_data[x]) > 0]:
+            if key in self.schema_dict:
+                schema = self.get_schema(key, self.schema_dict[key])
+                # Search for duplicates and report them
+                if key in self.new_entries:
+                    if 'primary_key' in schema:
+                        prior_id_values = [x[schema['primary_key']] for x in self.new_entries[key]]
+                        duplicates = [x for x in json_data[key] if x[schema['primary_key']] in prior_id_values]
+                        if len(duplicates) > 0:
+                            for i in range(len(duplicates)):
+                                matches = []
+                                for j in range(len(self.new_entries_sources[key+'_primary_key'])):
+                                    matches.extend([self.new_entries_sources[key+'_primary_key'][j][x[schema['primary_key']]]
+                                        for x in self.new_entries[key]
+                                        if x[schema['primary_key']] in self.new_entries_sources[key+'_primary_key'][j]
+                                        and x[schema['primary_key']] == duplicates[i][schema['primary_key']]])
+                            print("Duplicates found in {0} [\"{1}\"]!  This entry: {2}\nconflicts with {3}".format(
+                                json_name, key, duplicates[i][schema['primary_key']], matches))
+                            input("Press Enter to Continue.")
+                    if 'unique_values' in schema and len(schema['unique_values']) > 0:
+                        for i in range(len(schema['unique_values'])):
+                            key_tag = key + '_' + schema['unique_values'][i]
+                            prior_values = [x[schema['unique_values'][i]] for x in self.new_entries[key]]
+                            duplicates = [x for x in json_data[key] if x[schema['unique_values'][i]] in prior_values]
+                            if len(duplicates) > 0:
+                                for i in range(len(duplicates)):
+                                    matches = []
+                                    for j in range(len(self.new_entries_sources[key_tag])):
+                                        matches.extend([self.new_entries_sources[key_tag][j][x[schema['unique_values'][i]]]
+                                            for x in self.new_entries[key]
+                                            if x[schema['unique_values'][i]] in self.new_entries_sources[key_tag][j]
+                                            and x[schema['unique_values'][i]] == duplicates[i][schema['unique_values'][i]]])
+                                    print("Duplicates found in {0} [\"{1}\"]!  This entry: {2}\nconflicts with {3}".format(
+                                        json_name, key, duplicates[i][schema['unique_values'][i]], matches))
+                                input("Press Enter to Continue.")
+                # Insert the primary keys and unique values into self.new_entries_sources so they can be referenced in future calls
+                if 'primary_key' in schema:
+                    if key+'_primary_key' in self.new_entries_sources:
+                        self.new_entries_sources[key+'_primary_key'].extend([{x[schema['primary_key']]:json_name}
+                            for x in json_data[key]])
+                    else:
+                        self.new_entries_sources[key+'_primary_key'] = [{x[schema['primary_key']]:json_name}
+                            for x in json_data[key]]
+                if 'unique_values' in schema and len(schema['unique_values']) > 0:
+                    for i in range(len(schema['unique_values'])):
+                        key_tag = key + '_' + schema['unique_values'][i]
+                        if key_tag in self.new_entries_sources:
+                            self.new_entries_sources[key_tag].extend([{x[schema['unique_values'][i]]:json_name} for x in json_data[key]])
+                        else:
+                            self.new_entries_sources[key_tag] = [{x[schema['unique_values'][i]]:json_name} for x in json_data[key]]
+        return
+
     def read_kurodlc_json(self, json_name):
         if os.path.exists(json_name):
             json_data = self.read_struct_from_json(json_name)
             self.validate_kurodlc_entries(json_data, json_name)
+            self.detect_duplicate_entries(json_data, json_name)
             for key in json_data:
                 if key in self.new_entries:
                     self.new_entries[key].extend(json_data[key])
