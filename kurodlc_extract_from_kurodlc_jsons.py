@@ -73,7 +73,7 @@ def extract_kurodlc_data_to_dlc_maker_format (json_name):
                 if key in kt.new_entries[dlc_table_key][0] and not key in ['items', 'quantity']})
             dlc_data['dlc_name'] = dlc_data.pop('name')
             dlc_data['dlc_desc'] = dlc_data.pop('desc')
-            dlc_data['dlc_filename'] = json_name.split('.kurodlc.json')[0]
+            dlc_data['dlc_filename'] = json_name.replace('\\','/').split('/')[-1].split('.kurodlc.json')[0]
             item_quantity_dict = {kt.new_entries[dlc_table_key][0]['items'][i]: kt.new_entries[dlc_table_key][0]['quantity'][i]
                 for i in range(len(kt.new_entries[dlc_table_key][0]['items']))}
         item_dict_keys = kt.get_schema(item_table_key, kt.schema_dict[item_table_key])['keys']
