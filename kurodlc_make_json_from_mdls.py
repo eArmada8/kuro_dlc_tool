@@ -114,6 +114,8 @@ class dlc_table_maker:
                 base_name = "_".join(mdl_name.split('.')[0].split("_")[0:1])
                 if base_name[:2] == 'fc':
                     base_name = base_name[1:]
+                if base_name + '_c10' in self.name_dict and not base_name in self.name_dict: # Kuro 2
+                    base_name = base_name + '_c10'
             elif self.game_type == 'ys_x':
                 mdl_prefix = mdl_name.split('.')[0]
                 if len(mdl_prefix) == 5 and mdl_prefix[0:2] == 'c0':
