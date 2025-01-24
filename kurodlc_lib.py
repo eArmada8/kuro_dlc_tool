@@ -187,6 +187,11 @@ class kuro_tables:
                 'mat2_id', 'mat2_quant', 'mat3_id', 'mat3_quant', 'mat4_id', 'mat4_quant',\
                 'mat5_id', 'mat5_quant', 'mat6_id', 'mat6_quant'],\
                 'values': 'nnnnnnnnnnnnnnn', 'primary_key': 'recipe_id'})
+        elif name == 'BargainItem' and entry_length == 48: # Kai
+            return({'schema': "<I2H2Q2IQ2I", 'sch_len': 48,\
+                'keys': ['unk0', 'unk1', 'unk2', 'unk3',\
+                'unk_arr0', 'unk4', 'unk_arr1', 'unk5'],\
+                'values': 'nnnnbnbn'})
         else:
             return({})
 
