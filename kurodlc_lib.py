@@ -98,7 +98,7 @@ class kuro_tables:
             return({'schema': "<4H2Q2I3Q", 'sch_len': 56,\
                 'keys': ['char_restrict', 'type', 'item_id', 'unk0', 'unk_txt0', 'mdl_name',\
                     'unk1', 'unk2', 'attach_name', 'unk_txt1', 'unk_txt2'],\
-                'values': 'nnnnttnnttt', 'primary_key': 'item_id', 'unique_values': ['mdl_name']})
+                'values': 'nnnnttnnttt'})
         elif name == 'CostumeAttachOffset' and entry_length == 56: # Kuro 1 / 2
             return({'schema': "<2IQ10f", 'sch_len': 56,\
                 'keys': ['char_id', 'unk0', 'mdl_name', 't0', 't1', 't2', 'r0', 'r1', 'r2',\
