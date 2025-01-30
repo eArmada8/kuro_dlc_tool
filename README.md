@@ -1,6 +1,6 @@
 # Trails through Daybreak DLC table maker for custom costumes
 
-This is a small collection of scripts to write t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) for making costume mods in Trails through Daybreak NIS America release (PC) and Ys X NIS America release (PC).  The making of tables in Kuro no Kiseki II CLE (PC) release has been tested, although not extensively.  Other platforms / CLE releases are not tested, so YMMV.
+This is a small collection of scripts to write t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) for making costume mods in Trails through Daybreak NIS America release (PC) and Ys X NIS America release (PC).  The making of tables in Kuro no Kiseki II and Kai no Kiseki CLE (PC) release has been tested, although not extensively.  Other platforms / CLE releases are not tested, so YMMV.
 
 ## Credits
 
