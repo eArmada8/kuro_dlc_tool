@@ -220,13 +220,12 @@ class kuro_tables:
                 schema = self.get_schema(key, self.schema_dict[key])
                 if not all([list(json_data[key][i].keys()) == schema['keys']\
                         for i in range(len(json_data[key]))]):
-                    print("Validation of {0} failed, schema in {1} is incorrect!".format(json_name, key))
                     if [all([x in schema['keys'] for x in list(json_data[key][i].keys())]) for i in range(len(json_data[key]))]:
-                        print("Keys present but out-of-order, attempting correction.")
                         for i in range(len(json_data[key])):
                             if not list(json_data[key][i].keys()) == schema['keys']:
                                 json_data[key][i] = {x:json_data[key][i][x] for x in schema['keys']}
                     else:
+                        print("Validation of {0} failed, schema in {1} is incorrect!".format(json_name, key))
                         input("Invalid or missing keys, auto-correction not possible.")
                         raise
                 pass_value_validation = True
