@@ -17,6 +17,7 @@ class dlc_table_maker:
     def __init__ (self):
         self.kt = kuro_tables()
         self.game_type = "" # Filled in by self.get_dlc_details()
+        self.game_subtype = 0
         self.dlc_details = self.get_dlc_details()
         self.name_dict = self.get_names()
         self.models = self.get_mdl_details()
@@ -189,8 +190,19 @@ class dlc_table_maker:
                                 print("Invalid entry!")
                         except ValueError:
                             print("Invalid entry!")
-                if 'subcategory' not in mdl_details.keys() or mdl_details['subcategory'] not in [15,17]:
-                    mdl_details['subcategory'] = {17:15, 18:15, 19:15, 24:17}[mdl_details['category']]
+                if 'subcategory' not in mdl_details.keys() or mdl_details['subcategory'] not in [15,16,17,18]:
+                    while not self.game_subtype in [1,2]:
+                        game_subtype_raw = input("What game is this DLC for?  [1: Kuro 1, 2: Kuro 2 / Kai] ")
+                        try:
+                            self.game_subtype = int(game_subtype_raw)
+                            if self.game_subtype not in [1,2]:
+                                print("Invalid entry!")
+                        except ValueError:
+                            print("Invalid entry!")
+                    if self.game_subtype == 1:
+                        mdl_details['subcategory'] = {17:15, 18:15, 19:15, 24:17}[mdl_details['category']]
+                    else:
+                        mdl_details['subcategory'] = {17:16, 18:16, 19:16, 24:18}[mdl_details['category']]
                 while 'attach_name' not in mdl_details.keys()\
                         or (mdl_details['attach_name'] == '' and mdl_details['category'] == 19):
                     if mdl_details['category'] == 19:
