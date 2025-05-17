@@ -47,13 +47,13 @@ class kuro_tables:
                     'unk1', 'name', 'desc', 'unk_txt', 'unk2', 'unk3',\
                     'unk4', 'unk_arr', 'unk5'],\
                 'values': 'nnanantttnnnan', 'primary_key': 'id'})
-        if name == 'DLCTableData' and entry_length == 64: # Kuro 2
+        elif name == 'DLCTableData' and entry_length == 64: # Kuro 2
             self.schema_dict[name] = entry_length
             return({'schema': "<2IQ2IQ2I3Q", 'sch_len': 64,\
                 'keys': ['id', 'sort_id', 'items', 'unk0', 'quantity',\
                     'unk1', 'name', 'desc', 'unk_txt'],\
                 'values': 'nnananttt', 'primary_key': 'id'})
-        if name == 'DLCTable' and entry_length == 64: # Ys X
+        elif name == 'DLCTable' and entry_length == 64: # Ys X
             self.schema_dict[name] = entry_length
             return({'schema': "<2IQ2IQ2I3Q", 'sch_len': 64,\
                 'keys': ['id', 'sort_id', 'items', 'unk0', 'quantity',\
@@ -236,7 +236,7 @@ class kuro_tables:
                                 or isinstance(json_data[key][j][schema['keys'][i]], float) for j in range(len(json_data[key]))]):
                             problem_keys.append(schema['keys'][i])
                             pass_value_validation = False
-                    elif schema['values'][i] == 'a':
+                    elif schema['values'][i] in ['a', 'b']:
                         if not all([isinstance(json_data[key][j][schema['keys'][i]], list)\
                                 and all([isinstance(k, int) for k in json_data[key][j][schema['keys'][i]]])\
                                 for j in range(len(json_data[key]))]):
