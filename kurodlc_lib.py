@@ -119,21 +119,27 @@ class kuro_tables:
         for key in [x for x in json_data if len(json_data[x]) > 0]:
             if key in self.schema_dict:
                 schema = self.get_schema(key, self.schema_dict[key])
+                if 'primary_key' in schema and isinstance(schema['primary_key'], list):
+                    schema['new_primary_key'] = "_".join(schema['primary_key'])
+                    for i in range(len(json_data[key])):
+                        json_data[key][i][schema['new_primary_key']] =\
+                            tuple(json_data[key][i][j] for j in schema['primary_key'] if j in json_data[key][i])
                 # Search for duplicates and report them
                 if key in self.new_entries:
                     if 'primary_key' in schema:
-                        prior_id_values = [x[schema['primary_key']] for x in self.new_entries[key]]
-                        duplicates = [x for x in json_data[key] if x[schema['primary_key']] in prior_id_values]
+                        primary_key = schema['new_primary_key'] if 'new_primary_key' in schema else schema['primary_key']
+                        prior_id_values = [x[primary_key] for x in self.new_entries[key]]
+                        duplicates = [x for x in json_data[key] if x[primary_key] in prior_id_values]
                         if len(duplicates) > 0:
                             for i in range(len(duplicates)):
                                 matches = []
                                 for j in range(len(self.new_entries_sources[key+'_primary_key'])):
-                                    matches.extend([self.new_entries_sources[key+'_primary_key'][j][x[schema['primary_key']]]
+                                    matches.extend([self.new_entries_sources[key+'_primary_key'][j][x[primary_key]]
                                         for x in self.new_entries[key]
-                                        if x[schema['primary_key']] in self.new_entries_sources[key+'_primary_key'][j]
-                                        and x[schema['primary_key']] == duplicates[i][schema['primary_key']]])
+                                        if x[primary_key] in self.new_entries_sources[key+'_primary_key'][j]
+                                        and x[primary_key] == duplicates[i][primary_key]])
                             print("Duplicates found in {0} [\"{1}\"]!  This entry: {2}\nconflicts with {3}".format(
-                                json_name, key, duplicates[i][schema['primary_key']], matches))
+                                json_name, key, duplicates[i][primary_key], matches))
                             input("Press Enter to Continue.")
                     if 'unique_values' in schema and len(schema['unique_values']) > 0:
                         for i in range(len(schema['unique_values'])):
@@ -153,11 +159,12 @@ class kuro_tables:
                                 input("Press Enter to Continue.")
                 # Insert the primary keys and unique values into self.new_entries_sources so they can be referenced in future calls
                 if 'primary_key' in schema:
+                    primary_key = schema['new_primary_key'] if 'new_primary_key' in schema else schema['primary_key']
                     if key+'_primary_key' in self.new_entries_sources:
-                        self.new_entries_sources[key+'_primary_key'].extend([{x[schema['primary_key']]:json_name}
+                        self.new_entries_sources[key+'_primary_key'].extend([{x[primary_key]:json_name}
                             for x in json_data[key]])
                     else:
-                        self.new_entries_sources[key+'_primary_key'] = [{x[schema['primary_key']]:json_name}
+                        self.new_entries_sources[key+'_primary_key'] = [{x[primary_key]:json_name}
                             for x in json_data[key]]
                 if 'unique_values' in schema and len(schema['unique_values']) > 0:
                     for i in range(len(schema['unique_values'])):
@@ -192,8 +199,13 @@ class kuro_tables:
                 table[key].extend(self.new_entries[key])
                 #For tables with primary keys, cull old entries by primary key if new one supercedes them
                 schema = self.get_schema(key, self.schema_dict[key])
+                if 'primary_key' in schema and isinstance(schema['primary_key'], list):
+                    schema['new_primary_key'] = "_".join(schema['primary_key'])
+                    for i in range(len(table[key])):
+                        table[key][i][schema['new_primary_key']] =\
+                            tuple(table[key][i][j] for j in schema['primary_key'] if j in table[key][i])
                 if 'primary_key' in schema:
-                    primary_key = schema['primary_key']
+                    primary_key = schema['new_primary_key'] if 'new_primary_key' in schema else schema['primary_key']
                     table[key] = list({table[key][i][primary_key]:table[key][i] for i in range(len(table[key]))}.values())
         return(table)
 
@@ -271,6 +283,8 @@ class kuro_tables:
         def encode_row(raw_data, schema_table):
             encoded_data = []
             for key in raw_data:
+                if 'new_primary_key' in schema_table and key == schema_table['new_primary_key']:
+                    continue # Do not encode the temporary tuple used to identify unique rows
                 if isinstance(raw_data[key], str):
                     data_offset = len(self.data2_buffer)
                     write_null_term_str(raw_data[key])

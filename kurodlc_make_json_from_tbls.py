@@ -26,7 +26,7 @@ if __name__ == "__main__":
     kt = kuro_tables()
 
     kurodlc_json = {}
-    for table in ['t_costume', 't_dlc', 't_item', 't_recipe', 't_shop']:
+    for table in ['t_costume', 't_dlc', 't_item', 't_recipe', 't_shop', 't_skill']:
         new_tbl, orig_tbl = table + '.tbl', table + '.tbl.original'
         if os.path.exists(new_tbl) and os.path.exists(orig_tbl):
             orig_tbl_data = kt.read_table(orig_tbl)

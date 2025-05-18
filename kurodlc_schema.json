@@ -696,5 +696,143 @@
             ],
             "values": "nnnnbnbn"
         }
+    },
+    {
+        "info_comment": "Kuro 1 / 2",
+        "table_header": "SkillParam",
+        "schema_length": 176,
+        "schema": {
+            "schema": "<HihQ2BihQi3f20If3HhHh4Q",
+            "sch_len": 176,
+            "keys": [
+                "id",
+                "character_restriction",
+                "short",
+                "flag",
+                "category",
+                "element",
+                "empty1",
+                "empty2",
+                "flag2",
+                "targeting_data",
+                "float1",
+                "target_aoe_range",
+                "target_aoe_size",
+                "effects_0_id",
+                "effects_0_value1",
+                "effects_0_value2",
+                "effects_0_value3",
+                "effects_1_id",
+                "effects_1_value1",
+                "effects_1_value2",
+                "effects_1_value3",
+                "effects_2_id",
+                "effects_2_value1",
+                "effects_2_value2",
+                "effects_2_value3",
+                "effects_3_id",
+                "effects_3_value1",
+                "effects_3_value2",
+                "effects_3_value3",
+                "effects_4_id",
+                "effects_4_value1",
+                "effects_4_value2",
+                "effects_4_value3",
+                "stun_chance",
+                "cast_delay",
+                "recovery_delay",
+                "cost",
+                "level_learn",
+                "sort_id",
+                "data",
+                "animation",
+                "name",
+                "description_1",
+                "description_2"
+            ],
+            "values": "nnntnnnntnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttt",
+            "primary_key": [
+				"id",
+				"character_restriction",
+				"category"
+			]
+        }
+    },
+    {
+        "info_comment": "Kuro 2",
+        "table_header": "SkillPowerIcon",
+        "schema_length": 8,
+        "schema": {
+            "schema": "<2i",
+            "sch_len": 8,
+            "keys": [
+                "skill_power",
+                "icon_id"
+            ],
+            "values": "nn",
+            "primary_key": "skill_power"
+        }
+    },
+    {
+        "info_comment": "Kuro 1",
+        "table_header": "SkillGetParam",
+        "schema_length": 6,
+        "schema": {
+            "schema": "<3H",
+            "sch_len": 6,
+            "keys": [
+                "character_id",
+                "skill_id_1",
+                "skill_id_2"
+            ],
+            "values": "nnn"
+        }
+    },
+    {
+        "info_comment": "Kuro 2",
+        "table_header": "SkillGetParam",
+        "schema_length": 10,
+        "schema": {
+            "schema": "<5H",
+            "sch_len": 10,
+            "keys": [
+                "character_id",
+                "skill_id_1",
+                "skill_id_2",
+                "skill_id_3",
+                "skill_id_4"
+            ],
+            "values": "nnnnn"
+        }
+    },
+    {
+        "info_comment": "",
+        "table_header": "SkillChangeParam",
+        "schema_length": 8,
+        "schema": {
+            "schema": "<Hh2H",
+            "sch_len": 8,
+            "keys": [
+                "character_id",
+                "data",
+                "skill_id_1",
+                "skill_id_2"
+            ],
+            "values": "nnnn"
+        }
+    },
+    {
+        "info_comment": "",
+        "table_header": "SkillGrendelParam",
+        "schema_length": 4,
+        "schema": {
+            "schema": "<2H",
+            "sch_len": 4,
+            "keys": [
+                "character_id",
+                "grendel_character_id"
+            ],
+            "values": "nn"
+        }
     }
 ]

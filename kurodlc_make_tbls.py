@@ -39,3 +39,5 @@ if __name__ == "__main__":
         kt.write_table('t_recipe.tbl')
     if os.path.exists('t_shop.tbl') or os.path.exists('t_shop.tbl.original'):
         kt.write_table('t_shop.tbl')
+    if os.path.exists('t_skill.tbl') or os.path.exists('t_skill.tbl.original'):
+        kt.write_table('t_skill.tbl')
