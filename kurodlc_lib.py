@@ -22,8 +22,9 @@ class kuro_tables:
         self.init_schemas()
 
     def init_schemas(self):
-        if os.path.exists('kurodlc_schema.json'):
-            kurodlc_schema = json.loads(open('kurodlc_schema.json','rb').read())
+        schema_filename = os.path.abspath(os.path.join(os.path.dirname(__file__), 'kurodlc_schema.json'))
+        if os.path.exists(schema_filename):
+            kurodlc_schema = json.loads(open(schema_filename,'rb').read())
             self.schemas = {(x['table_header'],x['schema_length']):x['schema'] for x in kurodlc_schema}
         else:
             print("kurodlc_schema.json is missing!  This tool will not be able to read tables.")
