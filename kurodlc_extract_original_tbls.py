@@ -22,7 +22,7 @@ def extract_original_tbls_from_p3a (original_p3a_filename):
             headers, entries, p3a_dict = p3a.read_p3a_toc()
             files_to_extract = ['t_costume.tbl', 't_dlc.tbl', 't_item.tbl', 't_recipe.tbl', 't_shop.tbl', 't_skill.tbl', 't_name.tbl']
             filenames = ['t_costume.tbl.original', 't_dlc.tbl.original', 't_item.tbl.original',
-                't_recipe.tbl.original', 't_shop.tbl.original', 't_name.tbl']
+                't_recipe.tbl.original', 't_shop.tbl.original', 't_skill.tbl.original', 't_name.tbl']
             entries_to_extract = []
             for filename in files_to_extract:
                 matching_entries = [entry for entry in entries if filename in entry['name']]
