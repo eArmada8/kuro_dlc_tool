@@ -834,5 +834,25 @@
             ],
             "values": "nn"
         }
+    },
+    {
+        "info_comment": "",
+        "table_header": "VoiceTableData",
+        "schema_length": 40,
+        "schema": {
+            "schema": "<IiQifif1Q",
+            "sch_len": 40,
+            "keys": [
+                "id",
+                "int1",
+                "filename",
+                "int2",
+                "float1",
+                "int3",
+                "float2",
+                "subtitle"
+            ],
+            "values": "nntnnnnt"		
+        }
     }
 ]
