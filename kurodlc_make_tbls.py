@@ -41,3 +41,5 @@ if __name__ == "__main__":
         kt.write_table('t_shop.tbl')
     if os.path.exists('t_skill.tbl') or os.path.exists('t_skill.tbl.original'):
         kt.write_table('t_skill.tbl')
+    if os.path.exists('t_voice.tbl') or os.path.exists('t_voice.tbl.original'):
+        kt.write_table('t_voice.tbl')

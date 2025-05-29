@@ -20,12 +20,12 @@ def extract_original_tbls_from_p3a (original_p3a_filename):
     if os.path.exists(original_p3a_filename):
         with open(original_p3a_filename,'rb') as p3a.f:
             headers, entries, p3a_dict = p3a.read_p3a_toc()
-            files_to_extract = ['t_costume.tbl', 't_dlc.tbl', 't_item.tbl', 't_recipe.tbl', 't_shop.tbl', 't_skill.tbl', 't_name.tbl']
+            files_to_extract = ['t_costume.tbl', 't_dlc.tbl', 't_item.tbl', 't_recipe.tbl', 't_shop.tbl', 't_skill.tbl', 't_voice.tbl', 't_name.tbl']
             filenames = ['t_costume.tbl.original', 't_dlc.tbl.original', 't_item.tbl.original',
-                't_recipe.tbl.original', 't_shop.tbl.original', 't_skill.tbl.original', 't_name.tbl']
+                't_recipe.tbl.original', 't_shop.tbl.original', 't_skill.tbl.original', 't_voice.tbl.original', 't_name.tbl']
             entries_to_extract = []
             for filename in files_to_extract:
-                matching_entries = [entry for entry in entries if filename in entry['name']]
+                matching_entries = [entry for entry in entries if os.path.basename(filename) == os.path.basename(entry['name'])]
                 if len(matching_entries) > 0:
                     if len(matching_entries) > 1:
                         print("More than one {} found, extract which file?".format(filename))

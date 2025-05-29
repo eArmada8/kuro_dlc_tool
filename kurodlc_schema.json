@@ -836,11 +836,11 @@
         }
     },
     {
-        "info_comment": "",
+        "info_comment": "Kuro 1 / 2 / Kai",
         "table_header": "VoiceTableData",
         "schema_length": 40,
         "schema": {
-            "schema": "<IiQifif1Q",
+            "schema": "<IiQififQ",
             "sch_len": 40,
             "keys": [
                 "id",
@@ -852,7 +852,8 @@
                 "float2",
                 "subtitle"
             ],
-            "values": "nntnnnnt"		
+            "values": "nntnnnnt",
+            "primary_key": "id"	
         }
     }
 ]
