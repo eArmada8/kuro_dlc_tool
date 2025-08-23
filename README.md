@@ -1,6 +1,6 @@
 # Trails through Daybreak DLC table maker for custom costumes
 
-This is a small collection of scripts to write t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) for making costume mods in Trails through Daybreak NIS America release (PC) and Ys X NIS America release (PC).  The making of tables in Kuro no Kiseki II and Kai no Kiseki CLE (PC) release has been tested, although not extensively.  Other platforms / CLE releases are not tested, so YMMV.
+This is a small collection of scripts to write t_costume.tbl, t_dlc.tbl and t_item.tbl (and optionally t_shop.tbl) for making costume mods in Trails through Daybreak NIS America release (PC) and Ys X NIS America release (PC).  The making of tables in Kuro no Kiseki II / Kai no Kiseki CLE (PC) release and Trails in the Sky 1st Chapter GungHo (PC) release has been tested, although not extensively.  Other platforms / CLE releases are not tested, so YMMV.
 
 This tool is meant to be an extensible platform, and so other types of mods can potentially be generated with this tool.  See [How to use](#how-to-use).
 
@@ -34,14 +34,14 @@ Place all your .mdl files in a folder, and put `kurodlc_make_json_from_mdls.py` 
 
 Questions it will ask you:
 * Game platform:
-    1. Pick Kuro (Daybreak) or Ys X
+    1. Pick Kuro (Daybreak), Sky 1st Chapter or Ys X
 * DLC options:
 	1. DLC ID:  This number you determined above.
 	2. DLC Name:  The name of the DLC that the user will see in the DLC menu
 	3. DLC Description:  The description of the DLC that the user will see in the DLC menu
 * Item options:
 	1. Item ID: This number you determined above.  For accessories, if you want to group two or more accessories together (for example halo and angel wings), give them the same ID number.  The script will copy over the remaining information, except the attach point.  *untested*
-	2. Item Type: Enter 17 for costume, 19 for accessory, 18 for hair color or 24 for ARCUS cover.  Other types are not currently supported.
+	2. Item Type: (Kuro) Enter 17 for costume, 19 for accessory, 18 for hair color or 24 for ARCUS cover.  Other types are not currently supported.  The numbers are 15 (costume), 16 (hair color), 17 (accessory), 19 (Orbment cover) for Sky.  Ys X only supports costumes currently.
 	3. Attach point: This field only appears for accessories.  The attach point should be in the .inf file for the costumes it supports.  Some example attach points include Head_Point, Megane_Point, DLC_Point01, etc.
 	4. Character ID: Please look in t_name.tbl, or choose from the list the script gives you.  The script will look for any costume files in the folder and give those characters as options, but you can choose any ID under 200.  For example, Van is 0, Agnès is 1, and so on.  Please note that this number is NOT the same as the C_CHRxxx number.  (For example, Agnès's character ID is 1, even though her model is chr5001.  Please look in the t_name.tbl, which can be decoded with KuroTools.  *Warning t_name.tbl has spoilers!*)
 	5. Item Name:  The name of the item that the user will see in the item / costume menus

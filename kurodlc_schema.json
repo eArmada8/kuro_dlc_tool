@@ -202,6 +202,75 @@
         }
     },
     {
+        "info_comment": "Sky 1st",
+        "table_header": "ItemTableData",
+        "schema_length": 232,
+        "schema": {
+            "schema": "<2I2Q2B3HI2f20If10I6i3Q4I",
+            "sch_len": 232,
+            "keys": [
+                "id",
+                "chr_restrict",
+                "flags",
+                "unk_txt",
+                "category",
+                "subcategory",
+                "item_icon",
+                "effect_icon",
+                "element",
+                "int1",
+                "float1",
+                "float2",
+                "eff1_id",
+                "eff1_0",
+                "eff1_1",
+                "eff1_2",
+                "eff2_id",
+                "eff2_0",
+                "eff2_1",
+                "eff2_2",
+                "eff3_id",
+                "eff3_0",
+                "eff3_1",
+                "eff3_2",
+                "eff4_id",
+                "eff4_0",
+                "eff4_1",
+                "eff4_2",
+                "eff5_id",
+                "eff5_0",
+                "eff5_1",
+                "eff5_2",
+                "float3",
+                "hp",
+                "ep",
+                "str",
+                "def",
+                "ats",
+                "adf",
+                "agl",
+                "dex",
+                "hit",
+                "eva",
+                "aev",
+                "crit",
+                "spd",
+                "mov",
+                "stack_size",
+                "price",
+                "anim",
+                "name",
+                "desc",
+                "unk6",
+                "unk7",
+                "unk8",
+                "unk9"
+            ],
+            "values": "nnttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttnnnn",
+            "primary_key": "id"
+        }
+    },
+    {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ItemKindParam2",
         "schema_length": 16,
@@ -260,6 +329,20 @@
             ],
             "values": "nnn",
             "primary_key": "id"
+        }
+    },
+    {
+        "info_comment": "Sky 1st",
+        "table_header": "ItemShopTabType",
+        "schema_length": 8,
+        "schema": {
+            "schema": "<2I",
+            "sch_len": 8,
+            "keys": [
+                "int1",
+                "int2"
+            ],
+            "values": "nn"
         }
     },
     {
@@ -502,6 +585,35 @@
         }
     },
     {
+        "info_comment": "Sky 1st",
+        "table_header": "ShopInfo",
+        "schema_length": 72,
+        "schema": {
+            "schema": "<4Q2H7f4H",
+            "sch_len": 72,
+            "keys": [
+                "id",
+                "shop_name",
+                "long1",
+                "flag",
+                "empty",
+                "short1",
+                "float1",
+                "float2",
+                "float3",
+                "float4",
+                "float5",
+                "float6",
+                "float7",
+                "int1",
+                "int2",
+                "int3",
+                "int4"
+            ],
+            "values": "ntntnnnnnnnnnnnnn"
+        }
+    },
+    {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ShopItem",
         "schema_length": 40,
@@ -648,6 +760,48 @@
             ],
             "values": "nntt"
         }
+    },
+    {
+        "info_comment": "Sky 1st",
+        "table_header": "CharaSettingInfo",
+        "schema_length": 20,
+        "schema": {
+            "schema": "<I4f",
+            "sch_len": 20,
+            "keys": [
+                "int",
+                "float0",
+                "float1",
+                "float2",
+                "float3"
+            ],
+            "values": "nnnnn"
+        }
+    },
+    {
+        "info_comment": "Sky 1st",
+        "table_header": "CharaArrange",
+        "schema_length": 64,
+        "schema": {
+			"schema": "<2I2Q4fQ4f",
+			"sch_len": 64,
+			"keys": [
+				"int0",
+				"int1",
+				"text0",
+				"text1",
+				"float0",
+				"float1",
+				"float2",
+				"float3",
+				"text2",
+				"float4",
+				"float5",
+				"float6",
+				"float7"
+			],
+			"values": "nnttnnnntnnnn"
+		}
     },
     {
         "info_comment": "Ys X",
