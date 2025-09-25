@@ -84,7 +84,7 @@ Place in a folder with the original tables renamed as t_costume.tbl.original, t_
 
 ### p3a_archive.py and p3a_extract.py
 
-Can be used in place of p3a_tool.exe to archive folders into p3a format or to extract p3a archives.  Drag a folder onto p3a_archive.py to create a .p3a archive.  Drag a .p3a archive to extract all files into a folder with the same name as the .p3a archive (minus the extension).
+Can be used in place of p3a_tool.exe to archive folders into p3a format or to extract p3a archives.  Drag a folder onto p3a_archive.py to create a .p3a archive.  Drag a .p3a archive onto p3a_extract.py to extract all files into a folder with the same name as the .p3a archive (minus the extension).
 
 *Command line options for `p3a_archive.py`:*
 `-a, --output_name OUTPUT_NAME`: Name of output p3a file (optional)
@@ -95,3 +95,14 @@ Can be used in place of p3a_tool.exe to archive folders into p3a format or to ex
 *Command line options for `p3a_extract.py`:*
 `-f, --output_folder OUTPUT_FOLDER`: Name of output folder (optional)
 `-o, --overwrite`: Overwrite existing files
+
+### sky_extract_pac.py and sky_create_pac.py
+
+Can be used to archive folders into pac format or to extract pac archives.  Drag a folder onto sky_create_pac.py to create a .pac archive.  Drag a .pac archive onto sky_extract_pac.py to extract all files into a folder with the same name as the .pac archive (minus the extension).
+
+*Command line options for `sky_create_pac.py`:*
+`-a, --output_name OUTPUT_NAME`: Name of output p3a file (optional)
+`-o, --overwrite`: Overwrite existing files
+
+*Command line options for `sky_extract_pac.py`:*
+There are no command line options for sky_extract_pac.py.
