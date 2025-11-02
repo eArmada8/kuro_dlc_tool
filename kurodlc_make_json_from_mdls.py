@@ -415,7 +415,7 @@ class dlc_table_maker:
                 if 'flags' not in mdl_details.keys():
                     mdl_details['flags'] = ''
                 if 'unk_txt' not in mdl_details.keys():
-                    mdl_details['unk_txt'] = {15:'2', 16:'2', 17:'2', 19:'2'}[mdl_details['category']]
+                    mdl_details['unk_txt'] = {15:'2', 16:'2', 17:'1', 19:'2'}[mdl_details['category']]
                 if 'item_icon' not in mdl_details.keys() or mdl_details['item_icon'] == '':
                     mdl_details['item_icon'] = 0
                 if 'effect_icon' not in mdl_details.keys() or mdl_details['effect_icon'] == '':
@@ -507,7 +507,7 @@ class dlc_table_maker:
                 if 'unk6' not in mdl_details.keys() or mdl_details['unk6'] == '':
                     mdl_details['unk6'] = 0
                 if 'unk7' not in mdl_details.keys() or mdl_details['unk7'] == '':
-                    mdl_details['unk7'] = 0
+                    mdl_details['unk7'] = mdl_details['id'] # Sort ID
                 if 'unk8' not in mdl_details.keys() or mdl_details['unk8'] == '':
                     mdl_details['unk8'] = 0
                 if 'unk9' not in mdl_details.keys() or mdl_details['unk9'] == '':
