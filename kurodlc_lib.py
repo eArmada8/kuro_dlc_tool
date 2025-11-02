@@ -15,6 +15,7 @@ class kuro_tables:
         self.schemas = {}
         self.schema_dict = {}
         self.crc_dict = {}
+        self.missing_schemas = []
         self.data2_start_offset = 0
         self.data2_buffer = b''
         self.new_entries = {}
@@ -247,6 +248,7 @@ class kuro_tables:
                     decoded_data[keys[j]] = read_null_term_str(raw_data[i])
                     i += 1
             return(decoded_data)
+        self.missing_schemas = [] #Re-initialize
         with open(table_name, 'rb') as f:
             magic = f.read(4)
             if magic == b'#TBL':
@@ -265,6 +267,9 @@ class kuro_tables:
                     f.seek(headers[i]['start_offset'])
                     schema = self.get_schema(headers[i]['name'], headers[i]['entry_length'])
                     if schema == {}:
+                        print("Missing schema: {0}! {1} will not be processed.".format(headers[i]['name'],
+                            os.path.basename(table_name).replace('.original','')))
+                        self.missing_schemas.append(headers[i]['name'])
                         continue
                     raw_data = [struct.unpack(schema['schema'], f.read(schema['sch_len'])) for j in range(headers[i]['num_entries'])]
                     tbl_data[headers[i]['name']] = [decode_row(x, schema['keys'], schema['values']) for x in raw_data]
@@ -314,6 +319,8 @@ class kuro_tables:
         if os.path.exists(table_name) and not os.path.exists(table_name+'.original'):
             shutil.copy2(table_name, table_name+'.original')
         table = self.read_table(table_name+'.original')
+        if len(self.missing_schemas) > 0:
+            return # Do not attempt to write to table with missing schemas
         table = self.update_table_with_kurodlc(table)
         new_table = b'#TBL' + struct.pack("<I", len(table))
         offset = 8 + len(table) * 80
