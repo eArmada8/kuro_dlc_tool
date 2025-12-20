@@ -59,6 +59,8 @@ if __name__ == "__main__":
 
     if os.path.exists('script_en.p3a'):
         create_combined_tables_p3a('script_en.p3a')
+    if os.path.exists('script_eng.p3a'):
+        create_combined_tables_p3a('script_eng.p3a')
     elif os.path.exists('script.p3a'):
         create_combined_tables_p3a('script.p3a')
     elif os.path.exists('misc.p3a'):
