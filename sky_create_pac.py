@@ -35,7 +35,7 @@ def pack_folder (folder_name, output_name = None, overwrite = False):
     if output_name == None:
         pac_name = folder_name + '.pac'
     else:
-        pac_name = "".join([x if x not in "\/:*?<>|" else "_" for x in output_name]) #Sanitize
+        pac_name = "".join([x if x not in "\\/:*?<>|" else "_" for x in output_name]) #Sanitize
         if not pac_name.lower()[-4:] == '.pac':
             pac_name = pac_name + '.pac'
     if os.path.exists(pac_name) and overwrite == False:

@@ -171,7 +171,7 @@ class p3a_class:
         if output_name == None:
             p3a_name = folder_name + '.p3a'
         else:
-            p3a_name = "".join([x if x not in "\/:*?<>|" else "_" for x in output_name]) #Sanitize
+            p3a_name = "".join([x if x not in "\\/:*?<>|" else "_" for x in output_name]) #Sanitize
             if not p3a_name.lower()[-4:] == '.p3a':
                 p3a_name = p3a_name + '.p3a'
         if os.path.exists(p3a_name) and overwrite == False:
