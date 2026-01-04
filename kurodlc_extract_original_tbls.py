@@ -57,6 +57,8 @@ if __name__ == "__main__":
 
     if os.path.exists('script_en.p3a'):
         extract_original_tbls_from_p3a('script_en.p3a')
+    if os.path.exists('script_eng.p3a'):
+        extract_original_tbls_from_p3a('script_eng.p3a')
     elif os.path.exists('script.p3a'):
         extract_original_tbls_from_p3a('script.p3a')
     elif os.path.exists('misc.p3a'):
