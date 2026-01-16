@@ -19,9 +19,6 @@ except ModuleNotFoundError as e:
 
 def create_combined_tables_p3a (p3as_to_extract, new_p3a_filename = 'zzz_combined_tables.p3a'):
     p3a = p3a_class()
-    kt = kuro_tables()
-    # Read *.kurodlc.json files
-    kt.read_all_kurodlc_jsons()
     entries_to_extract = []
     for i in range(len(p3as_to_extract)):
         with open(p3as_to_extract[i],'rb') as p3a.f:
@@ -40,6 +37,9 @@ def create_combined_tables_p3a (p3as_to_extract, new_p3a_filename = 'zzz_combine
             entries_to_extract.extend(current_p3a_entries_to_extract)
     all_temporary_folders = sorted(list(set([os.path.dirname(x['name']) for x in entries_to_extract])))
     filenames_to_process = [x['name'] for x in entries_to_extract]
+    kt = kuro_tables()
+    # Read *.kurodlc.json files
+    kt.read_all_kurodlc_jsons()
     for table_filename in filenames_to_process:
         kt.write_table(table_filename)
     assigned_paths = {filenames_to_process[i]:entries_to_extract[i]['name'] for i in range(len(filenames_to_process))}
