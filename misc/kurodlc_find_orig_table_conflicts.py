@@ -62,18 +62,22 @@ if __name__ == "__main__":
         t_dlc = kt.read_table('t_dlc.tbl')
 
     # Find originals
-    dlcs = {x['id']:x['name'] for x in t_dlc['DLCTableData']}
-    
-    # Find conflicts with original item table
-    dlc_conflicts = [x for x in kt.new_entries['DLCTableData'] if x['id'] in dlcs.keys()]
-    if len(dlc_conflicts) > 0:
-        print("The following dlc conflicts were found:")
-        for i in range(len(dlc_conflicts)):
-            matches = [kt.new_entries_sources['DLCTableData_primary_key'][j][dlc_conflicts[i]['id']]
-                for j in range(len(kt.new_entries_sources['DLCTableData_primary_key']))
-                if dlc_conflicts[i]['id'] in kt.new_entries_sources['DLCTableData_primary_key'][j]]
-            print("{}. {} - {} in {} conflicts with {} in t_dlc!".format(i+1, dlc_conflicts[i]['id'],
-                dlc_conflicts[i]['name'], matches, dlcs[dlc_conflicts[i]['id']]))
+    dlc_header = 'DLCTableData' if 'DLCTableData' in t_dlc else 'DLCTable' if 'DLCTable' in t_dlc else ''
+    if not dlc_header == '':
+        pkey = {'DLCTableData':'DLCTableData_primary_key', 'DLCTable':'DLCTable_primary_key'}[dlc_header]
+        dlcs = {x['id']:x['name'] for x in t_dlc[dlc_header]}
+        # Find conflicts with original item table
+        dlc_conflicts = [x for x in kt.new_entries[dlc_header] if x['id'] in dlcs.keys()]
+        if len(dlc_conflicts) > 0:
+            print("The following dlc conflicts were found:")
+            for i in range(len(dlc_conflicts)):
+                matches = [kt.new_entries_sources[pkey][j][dlc_conflicts[i]['id']]
+                    for j in range(len(kt.new_entries_sources[pkey]))
+                    if dlc_conflicts[i]['id'] in kt.new_entries_sources[pkey][j]]
+                print("{}. {} - {} in {} conflicts with {} in t_dlc!".format(i+1, dlc_conflicts[i]['id'],
+                    dlc_conflicts[i]['name'], matches, dlcs[dlc_conflicts[i]['id']]))
+        else:
+            print("No conflicts with t_dlc.tbl!")
     else:
-        print("No conflicts with t_dlc.tbl!")
+        print("t_dlc.tbl not compatible!")
     input("Press Enter to Continue.")
