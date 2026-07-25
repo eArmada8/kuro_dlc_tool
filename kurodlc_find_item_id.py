@@ -33,9 +33,16 @@ if __name__ == "__main__":
     # Read *.kurodlc.json files and add to table (in memory)
     kt.read_all_kurodlc_jsons()
     t_item = kt.update_table_with_kurodlc(t_item)
-    items = {x['id']:x['name'] for x in t_item['ItemTableData']}
+    if not ('ItemTableData' in t_item or
+            'ItemParam' in t_item):
+        input("t_item.tbl format not supported! Press Enter to quit.")
+        sys.exit(0)
+    itemtabledata_name = ('ItemTableData' if 'ItemTableData' in t_item
+                    else 'ItemParam' if 'ItemParam' in t_item
+                    else '')
+    items = {x['id']:x['name'] for x in t_item[itemtabledata_name]}
 
-    if kt.schema_dict['ItemTableData'] == 176: # Ys X
+    if kt.schema_dict[itemtabledata_name] == 176 and len(t_item) == 1: # Ys X
         # Dunno what the actual upper limit of item IDs is
         id_lower_limit, id_upper_limit = 1, 60000
     else: # Kuro 1 / 2

@@ -22,23 +22,24 @@ def extract_kurodlc_data_to_dlc_maker_format (json_name):
     dlc_entries_present = False
     recipe_ids_present = False # Can be True only for Ys X entries
     shop_entries_present = False
-    if 'CostumeParam' in kt.new_entries and len(kt.new_entries['CostumeParam']) > 0: # Kuro 1 / 2
+    if 'CostumeParam' in kt.new_entries and len(kt.new_entries['CostumeParam']) > 0: # Kuro, Sky, Kyoto Xanadu
         game_type = 'kuro'
         mdl_key = 'mdl_name'
         costume_table_key = 'CostumeParam'
-        item_table_key = 'ItemTableData'
+        item_table_key = 'ItemParam' if 'ItemParam' in kt.new_entries else 'ItemTableData'
+        shop_table_key = 'ShopNormalItem' if 'ShopNormalItem' in kt.new_entries else 'ShopItem'
         char_restrict_key = 'char_restrict'
         dlc_table_key = 'DLCTableData'
         costume_entries_present = True
         if 'DLCTableData' in kt.new_entries and len(kt.new_entries['DLCTableData']) > 0:
             dlc_entries_present = True
-        if 'ShopItem' in kt.new_entries and len(kt.new_entries['ShopItem']) > 0:
+        if shop_table_key in kt.new_entries and len(kt.new_entries[shop_table_key]) > 0:
             shop_by_item = {}
-            for i in range(len(kt.new_entries['ShopItem'])):
-                if kt.new_entries['ShopItem'][i]['item_id'] in shop_by_item:
-                    shop_by_item[kt.new_entries['ShopItem'][i]['item_id']].append(kt.new_entries['ShopItem'][i]['shop_id'])
+            for i in range(len(kt.new_entries[shop_table_key])):
+                if kt.new_entries[shop_table_key][i]['item_id'] in shop_by_item:
+                    shop_by_item[kt.new_entries[shop_table_key][i]['item_id']].append(kt.new_entries[shop_table_key][i]['shop_id'])
                 else:
-                    shop_by_item[kt.new_entries['ShopItem'][i]['item_id']] = [kt.new_entries['ShopItem'][i]['shop_id']]
+                    shop_by_item[kt.new_entries[shop_table_key][i]['item_id']] = [kt.new_entries[shop_table_key][i]['shop_id']]
             shop_entries_present = True
     elif 'CostumeTable' in kt.new_entries and len(kt.new_entries['CostumeTable']) > 0: # Ys X
         game_type = 'ys_x'

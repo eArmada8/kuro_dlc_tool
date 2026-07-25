@@ -158,6 +158,30 @@
         }
     },
     {
+        "info_comment": "KyotoXanadu",
+        "table_header": "CostumeParam",
+        "schema_length": 64,
+        "schema": {
+            "schema": "<4H3Q2I3Q",
+            "sch_len": 64,
+            "keys": [
+                "char_restrict",
+                "type",
+                "item_id",
+                "unk0",
+                "unk_txt0",
+                "mdl_name",
+                "mdl_variant",
+                "unk1",
+                "unk2",
+                "attach_name",
+                "unk_txt1",
+                "unk_txt2"
+            ],
+            "values": "nnnntttnnttt"
+        }
+    },
+    {
         "info_comment": "Ys X",
         "table_header": "CostumeTable",
         "schema_length": 24,
@@ -269,6 +293,29 @@
         }
     },
     {
+        "info_comment": "KyotoXanadu",
+        "table_header": "DLCTableData",
+        "schema_length": 72,
+        "schema": {
+            "schema": "<2IQ2IQ2I4Q",
+            "sch_len": 72,
+            "keys": [
+                "id",
+                "sort_id",
+                "items",
+                "unk0",
+                "quantity",
+                "unk1",
+                "name",
+                "desc",
+                "desc2",
+                "unk_txt"
+            ],
+            "values": "nnanantttt",
+            "primary_key": "id"
+        }
+    },
+    {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ItemKindParam2",
         "schema_length": 16,
@@ -280,6 +327,59 @@
                 "value"
             ],
             "values": "nt",
+            "primary_key": "id"
+        }
+    },
+    {
+        "info_comment": "KyotoXanadu",
+        "table_header": "ItemParam",
+        "schema_length": 176,
+        "schema": {
+            "schema": "<2I2Q2B3HI3fI3fI3fI3fI3f2IQ4I4Q",
+            "sch_len": 176,
+            "keys": [
+                "id",
+                "chr_restrict",
+                "flag1",
+                "flag2",
+                "category",
+                "subcategory",
+                "icon",
+                "unk0",
+                "unk1",
+                "eff1_id",
+                "eff1_0",
+                "eff1_1",
+                "eff1_2",
+                "eff2_id",
+                "eff2_0",
+                "eff2_1",
+                "eff2_2",
+                "eff3_id",
+                "eff3_0",
+                "eff3_1",
+                "eff3_2",
+                "eff4_id",
+                "eff4_0",
+                "eff4_1",
+                "eff4_2",
+                "eff5_id",
+                "eff5_0",
+                "eff5_1",
+                "eff5_2",
+                "itm_lvl",
+                "stack_size",
+                "price",
+                "sort_id",
+                "unk2",
+                "unk3",
+                "unk4",
+                "anim",
+                "name",
+                "name2",
+                "desc"
+            ],
+            "values": "nnttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttt",
             "primary_key": "id"
         }
     },
@@ -805,6 +905,64 @@
         }
     },
     {
+        "info_comment": "KyotoXanadu",
+        "table_header": "ShopNormalBargain",
+        "schema_length": 48,
+        "schema": {
+            "schema": "<I2H2fQ2IQ2I",
+            "sch_len": 48,
+            "keys": [
+                "id",
+                "unk0",
+                "unk1",
+                "unk2",
+                "unk3",
+                "unk_arr0",
+                "unk4",
+                "unk_arr1",
+                "unk5"
+            ],
+            "values": "nnnnnbnbn"
+        }
+    },
+    {
+        "info_comment": "KyotoXanadu",
+        "table_header": "ShopNormalInfo",
+        "schema_length": 40,
+        "schema": {
+            "schema": "<2I4Q",
+            "sch_len": 40,
+            "keys": [
+                "id",
+                "unk0",
+                "shop_name",
+                "shop_desc",
+                "unk_txt1",
+                "unk_txt2"
+            ],
+            "values": "nntttt"
+        }
+    },
+    {
+        "info_comment": "KyotoXanadu",
+        "table_header": "ShopNormalItem",
+        "schema_length": 40,
+        "schema": {
+            "schema": "<HhiQIiQI1i",
+            "sch_len": 40,
+            "keys": [
+                "shop_id",
+                "item_id",
+                "unknown",
+                "start_scena_flags",
+                "empty1",
+                "end_scena_flags",
+                "int2"
+            ],
+            "values": "nnnbnbn"
+        }
+    },
+    {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ShopTypeDesc",
         "schema_length": 24,
@@ -840,6 +998,32 @@
                 "skill_id_2"
             ],
             "values": "nnnn"
+        }
+    },
+    {
+        "info_comment": "KyotoXanadu",
+        "table_header": "SkillEffectText",
+        "schema_length": 96,
+        "schema": {
+            "schema": "<2I11Q",
+            "sch_len": 96,
+            "keys": [
+                "effect_id",
+                "int1",
+                "text1",
+                "text2",
+                "long1",
+                "text3",
+                "long2",
+                "text4",
+                "long3",
+                "text5",
+                "long4",
+                "text6",
+                "long5"
+            ],
+            "values": "nnttntntntntn",
+            "primary_key": ""
         }
     },
     {
