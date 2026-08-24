@@ -40,6 +40,26 @@ class dlc_table_maker:
             else:
                 print("Invalid entry!")
         self.game_type = dlc_details['game_type']
+        if self.game_type in ['kuro', 'sky']:
+            if self.game_type == 'kuro':
+                while 'game_subtype' not in dlc_details.keys() or not dlc_details['game_subtype'] in [1,2]:
+                    game_subtype_raw = input("What game is this DLC for?  [1: Kuro 1, 2: Kuro 2 / Kai] ")
+                    try:
+                        dlc_details['game_subtype'] = int(game_subtype_raw)
+                        if dlc_details['game_subtype'] not in [1,2]:
+                            print("Invalid entry!")
+                    except ValueError:
+                        print("Invalid entry!")
+            elif self.game_type == 'sky':
+                while 'game_subtype' not in dlc_details.keys() or not dlc_details['game_subtype'] in [1,2]:
+                    game_subtype_raw = input("What game is this DLC for?  [1: Sky 1st, 2: Sky 2nd] ")
+                    try:
+                        dlc_details['game_subtype'] = int(game_subtype_raw)
+                        if dlc_details['game_subtype'] not in [1,2]:
+                            print("Invalid entry!")
+                    except ValueError:
+                        print("Invalid entry!")
+        self.game_subtype = dlc_details['game_subtype']
         while 'id' not in dlc_details.keys():
             dlc_id_raw = input("DLC ID number: ")
             try:
@@ -200,14 +220,6 @@ class dlc_table_maker:
                         except ValueError:
                             print("Invalid entry!")
                 if 'subcategory' not in mdl_details.keys() or mdl_details['subcategory'] not in [15,16,17,18]:
-                    while not self.game_subtype in [1,2]:
-                        game_subtype_raw = input("What game is this DLC for?  [1: Kuro 1, 2: Kuro 2 / Kai] ")
-                        try:
-                            self.game_subtype = int(game_subtype_raw)
-                            if self.game_subtype not in [1,2]:
-                                print("Invalid entry!")
-                        except ValueError:
-                            print("Invalid entry!")
                     if self.game_subtype == 1:
                         mdl_details['subcategory'] = {17:15, 18:15, 19:15, 24:17}[mdl_details['category']]
                     else:
@@ -468,6 +480,8 @@ class dlc_table_maker:
                 if 'attach_txt2' not in mdl_details.keys():
                     mdl_details['attach_txt2'] = ''
             elif self.game_type == 'sky':
+                if self.game_subtype > 1 and ('unk0' not in mdl_details.keys() or mdl_details['unk0'] == ''):
+                    mdl_details['unk0'] = 0
                 if 'flags' not in mdl_details.keys():
                     mdl_details['flags'] = ''
                 if 'unk_txt' not in mdl_details.keys():
@@ -526,6 +540,8 @@ class dlc_table_maker:
                     mdl_details['eff5_2'] = 0
                 if 'float3' not in mdl_details.keys() or mdl_details['float3'] == '':
                     mdl_details['float3'] = 0
+                if self.game_subtype > 1 and ('unk1' not in mdl_details.keys() or mdl_details['unk1'] == ''):
+                    mdl_details['unk1'] = 0
                 if 'hp' not in mdl_details.keys() or mdl_details['hp'] == '':
                     mdl_details['hp'] = 0
                 if 'ep' not in mdl_details.keys() or mdl_details['ep'] == '':
@@ -558,6 +574,8 @@ class dlc_table_maker:
                     mdl_details['stack_size'] = {15:1, 16:1, 17:8, 19:1}[mdl_details['category']]
                 if 'price' not in mdl_details.keys() or mdl_details['price'] == '':
                     mdl_details['price'] = 100
+                if self.game_subtype > 1 and ('unk2' not in mdl_details.keys() or mdl_details['unk2'] == ''):
+                    mdl_details['unk2'] = 0
                 if 'anim' not in mdl_details.keys():
                     mdl_details['anim'] = ''
                 if 'unk6' not in mdl_details.keys() or mdl_details['unk6'] == '':
@@ -770,24 +788,27 @@ class dlc_table_maker:
                 "name": mdl_data['name'], "desc": mdl_data['desc'], "unk6": mdl_data['unk6'], "unk7": mdl_data['unk7'],
                 "unk8": mdl_data['unk8'], "unk9": mdl_data['unk9']})
         elif self.game_type == 'sky':
-            return({"id": mdl_data['id'], "chr_restrict": mdl_data['chr_restrict'], "flags": mdl_data['flags'],
-                "unk_txt": mdl_data['unk_txt'], "category": mdl_data['category'], "subcategory": mdl_data['subcategory'],
-                "item_icon": mdl_data['item_icon'], "effect_icon": mdl_data['effect_icon'], "element": mdl_data['element'],
-                "int1": mdl_data['int1'], "float1": mdl_data['float1'], "float2": mdl_data['float2'],
-                "eff1_id": mdl_data['eff1_id'], "eff1_0": mdl_data['eff1_0'],
-                "eff1_1": mdl_data['eff1_1'], "eff1_2": mdl_data['eff1_2'], "eff2_id": mdl_data['eff2_id'],
-                "eff2_0": mdl_data['eff2_0'], "eff2_1": mdl_data['eff2_1'], "eff2_2": mdl_data['eff2_2'],
-                "eff3_id": mdl_data['eff3_id'], "eff3_0": mdl_data['eff3_0'], "eff3_1": mdl_data['eff3_1'],
-                "eff3_2": mdl_data['eff3_2'], "eff4_id": mdl_data['eff4_id'], "eff4_0": mdl_data['eff4_0'],
-                "eff4_1": mdl_data['eff4_1'], "eff4_2": mdl_data['eff4_2'], "eff5_id": mdl_data['eff5_id'],
-                "eff5_0": mdl_data['eff5_0'], "eff5_1": mdl_data['eff5_1'], "eff5_2": mdl_data['eff5_2'],
-                "float3": mdl_data['float3'], "hp": mdl_data['hp'], "ep": mdl_data['ep'], "str": mdl_data['str'],
-                "def": mdl_data['def'], "ats": mdl_data['ats'], "adf": mdl_data['adf'], "agl": mdl_data['agl'],
-                "dex": mdl_data['dex'], "hit": mdl_data['hit'], "eva": mdl_data['eva'], "aev": mdl_data['aev'],
-                "crit": mdl_data['crit'], "spd": mdl_data['spd'], "mov": mdl_data['mov'],
-                "stack_size": mdl_data['stack_size'], "price": mdl_data['price'], "anim": mdl_data['anim'],
-                "name": mdl_data['name'], "desc": mdl_data['desc'], "unk6": mdl_data['unk6'], "unk7": mdl_data['unk7'],
-                "unk8": mdl_data['unk8'], "unk9": mdl_data['unk9']})
+            item_entry = {"id": mdl_data['id'], "chr_restrict": mdl_data['chr_restrict'], "unk0": mdl_data['unk0'],
+            "flags": mdl_data['flags'], "unk_txt": mdl_data['unk_txt'], "category": mdl_data['category'],
+            "subcategory": mdl_data['subcategory'], "item_icon": mdl_data['item_icon'], "effect_icon": mdl_data['effect_icon'],
+            "element": mdl_data['element'], "int1": mdl_data['int1'], "float1": mdl_data['float1'], "float2": mdl_data['float2'],
+            "eff1_id": mdl_data['eff1_id'], "eff1_0": mdl_data['eff1_0'], "eff1_1": mdl_data['eff1_1'],
+            "eff1_2": mdl_data['eff1_2'], "eff2_id": mdl_data['eff2_id'], "eff2_0": mdl_data['eff2_0'],
+            "eff2_1": mdl_data['eff2_1'], "eff2_2": mdl_data['eff2_2'], "eff3_id": mdl_data['eff3_id'],
+            "eff3_0": mdl_data['eff3_0'], "eff3_1": mdl_data['eff3_1'], "eff3_2": mdl_data['eff3_2'],
+            "eff4_id": mdl_data['eff4_id'], "eff4_0": mdl_data['eff4_0'], "eff4_1": mdl_data['eff4_1'],
+            "eff4_2": mdl_data['eff4_2'], "eff5_id": mdl_data['eff5_id'], "eff5_0": mdl_data['eff5_0'],
+            "eff5_1": mdl_data['eff5_1'], "eff5_2": mdl_data['eff5_2'], "float3": mdl_data['float3'],
+            "unk1": mdl_data['unk1'], "hp": mdl_data['hp'], "ep": mdl_data['ep'], "str": mdl_data['str'],
+            "def": mdl_data['def'], "ats": mdl_data['ats'], "adf": mdl_data['adf'], "agl": mdl_data['agl'],
+            "dex": mdl_data['dex'], "hit": mdl_data['hit'], "eva": mdl_data['eva'], "aev": mdl_data['aev'],
+            "crit": mdl_data['crit'], "spd": mdl_data['spd'], "mov": mdl_data['mov'], "stack_size": mdl_data['stack_size'],
+            "price": mdl_data['price'], "unk2": mdl_data['unk2'], "anim": mdl_data['anim'], "name": mdl_data['name'],
+            "desc": mdl_data['desc'], "unk6": mdl_data['unk6'], "unk7": mdl_data['unk7'], "unk8": mdl_data['unk8'],
+            "unk9": mdl_data['unk9']}
+            if self.game_subtype == 2:
+                item_entry['chr_restrict'] = [item_entry['chr_restrict']]
+            return(item_entry)
         elif self.game_type == 'xanadu':
             return({"id": mdl_data['id'], "chr_restrict": mdl_data['chr_restrict'], "flag1": mdl_data['flags'],
                 "flag2": mdl_data['flags2'], "category": mdl_data['category'], "subcategory": mdl_data['subcategory'],
