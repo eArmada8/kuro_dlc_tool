@@ -480,7 +480,7 @@ class dlc_table_maker:
                 if 'attach_txt2' not in mdl_details.keys():
                     mdl_details['attach_txt2'] = ''
             elif self.game_type == 'sky':
-                if self.game_subtype > 1 and ('unk0' not in mdl_details.keys() or mdl_details['unk0'] == ''):
+                if 'unk0' not in mdl_details.keys() or mdl_details['unk0'] == '':
                     mdl_details['unk0'] = 0
                 if 'flags' not in mdl_details.keys():
                     mdl_details['flags'] = ''
@@ -540,7 +540,7 @@ class dlc_table_maker:
                     mdl_details['eff5_2'] = 0
                 if 'float3' not in mdl_details.keys() or mdl_details['float3'] == '':
                     mdl_details['float3'] = 0
-                if self.game_subtype > 1 and ('unk1' not in mdl_details.keys() or mdl_details['unk1'] == ''):
+                if 'unk1' not in mdl_details.keys() or mdl_details['unk1'] == '':
                     mdl_details['unk1'] = 0
                 if 'hp' not in mdl_details.keys() or mdl_details['hp'] == '':
                     mdl_details['hp'] = 0
@@ -574,7 +574,7 @@ class dlc_table_maker:
                     mdl_details['stack_size'] = {15:1, 16:1, 17:8, 19:1}[mdl_details['category']]
                 if 'price' not in mdl_details.keys() or mdl_details['price'] == '':
                     mdl_details['price'] = 100
-                if self.game_subtype > 1 and ('unk2' not in mdl_details.keys() or mdl_details['unk2'] == ''):
+                if 'unk2' not in mdl_details.keys() or mdl_details['unk2'] == '':
                     mdl_details['unk2'] = 0
                 if 'anim' not in mdl_details.keys():
                     mdl_details['anim'] = ''
