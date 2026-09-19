@@ -921,6 +921,15 @@ class dlc_table_maker:
             self.invalid_game_type() #probably ok to pass here, but this is for script debugging
         return(recipe_entries)
 
+    def make_viewer_entry (self, mdl_name):
+        mdl_data = self.models[mdl_name]
+        if self.game_type in ['sky'] and self.game_subtype == 2:
+            return({"short1": mdl_data['chr_restrict'], "short2": 0,
+        "short3": mdl_data['id'], "short4": 0, "text1": mdl_data['name'],
+        "int1": 0, "int2": mdl_data['unk7'], "text2": "" })
+        else:
+            self.invalid_game_type() #probably ok to pass here, but this is for script debugging
+
     def make_item_tbl_data (self):
         subtable_header = 'ItemParam' if self.game_type == 'xanadu' else 'ItemTableData'
         self.kurodlc_json[subtable_header] = []
@@ -955,6 +964,13 @@ class dlc_table_maker:
             self.kurodlc_json[subtable_header].extend(self.make_recipe_entries(self.model_list[i]))
         return
 
+    def make_viewer_tbl_data (self): # Sky 2nd only currently
+        subtable_header = 'ViewerCostumeList'
+        self.kurodlc_json[subtable_header] = []
+        for i in range(len(self.model_list)):
+            self.kurodlc_json[subtable_header].append(self.make_viewer_entry(self.model_list[i]))
+        return
+
 if __name__ == "__main__":
     # Set current directory
     os.chdir(os.path.abspath(os.path.dirname(__file__)))
@@ -965,5 +981,7 @@ if __name__ == "__main__":
     if dlc_table_maker.game_type == 'ys_x':
         dlc_table_maker.make_recipe_tbl_data()
     dlc_table_maker.make_shop_tbl_data()
+    if dlc_table_maker.game_type in ['sky'] and dlc_table_maker.game_subtype == 2:
+        dlc_table_maker.make_viewer_tbl_data()
     dlc_table_maker.kt.write_struct_to_json(dlc_table_maker.kurodlc_json,\
         dlc_table_maker.dlc_details['dlc_filename'] + '.kurodlc.json')

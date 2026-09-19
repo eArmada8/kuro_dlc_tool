@@ -24,7 +24,7 @@ def create_combined_tables_p3a (p3as_to_extract, new_p3a_filename = 'zzz_combine
         with open(p3as_to_extract[i],'rb') as p3a.f:
             headers, entries, p3a_dict = p3a.read_p3a_toc()
             files_to_extract = ['t_costume.tbl', 't_dlc.tbl', 't_item.tbl', 't_recipe.tbl', 't_shop_normal.tbl',
-                't_shop.tbl', 't_skill.tbl', 't_voice.tbl', 't_name.tbl']
+                't_shop.tbl', 't_skill.tbl', 't_viewer.tbl', 't_voice.tbl', 't_name.tbl']
             current_p3a_entries_to_extract = []
             for filename in files_to_extract:
                 current_p3a_entries_to_extract.extend([entry for entry in entries if os.path.basename(filename) == os.path.basename(entry['name'])])

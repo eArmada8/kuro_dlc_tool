@@ -1134,8 +1134,7 @@
                 "text6",
                 "long5"
             ],
-            "values": "nnttntntntntn",
-            "primary_key": ""
+            "values": "nnttntntntntn"
         }
     },
     {
@@ -1283,6 +1282,354 @@
                 "quant6"
             ],
             "values": "nnnnnnnnnnnnn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerAttachList",
+        "schema_length": 32,
+        "schema": {
+            "schema": "<h3HQ2I1q",
+            "sch_len": 32,
+            "keys": [
+                "short1",
+                "short2",
+                "short3",
+                "short4",
+                "text1",
+                "int1",
+                "int2",
+                "long"
+            ],
+            "values": "nnnntnnn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerBGMList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<iIQ1q",
+            "sch_len": 24,
+            "keys": [
+                "int1",
+                "int2",
+                "text1",
+                "long1"
+            ],
+            "values": "nntn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerCharaEquipList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<qQ1q",
+            "sch_len": 24,
+            "keys": [
+                "long1",
+                "text1",
+                "long2"
+            ],
+            "values": "ntn",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerCharaList",
+        "schema_length": 64,
+        "schema": {
+            "schema": "<hHI3Q2I2Q2f",
+            "sch_len": 64,
+            "keys": [
+                "short1",
+                "short2",
+                "int1",
+                "text1",
+                "text2",
+                "text3",
+                "int2",
+                "int3",
+                "text4",
+                "text5",
+                "float1",
+                "float2"
+            ],
+            "values": "nnntttnnttnn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerCharaSelectList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<q2Q",
+            "sch_len": 24,
+            "keys": [
+                "long1",
+                "text1",
+                "text2"
+            ],
+            "values": "ntt",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerCheekList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<q2Q",
+            "sch_len": 24,
+            "keys": [
+                "long",
+                "text1",
+                "text2"
+            ],
+            "values": "ntt"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerCostumeList",
+        "schema_length": 32,
+        "schema": {
+            "schema": "<h3HQ2I1Q",
+            "sch_len": 32,
+            "keys": [
+                "short1",
+                "short2",
+                "short3",
+                "short4",
+                "text1",
+                "int1",
+                "int2",
+                "text2"
+            ],
+            "values": "nnnntnnt"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerEnvList",
+        "schema_length": 16,
+        "schema": {
+            "schema": "<q1Q",
+            "sch_len": 16,
+            "keys": [
+                "long1",
+                "text1"
+            ],
+            "values": "nt",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerEyeLineList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<q2Q",
+            "sch_len": 24,
+            "keys": [
+                "long",
+                "text1",
+                "text2"
+            ],
+            "values": "ntt"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerFaceList",
+        "schema_length": 48,
+        "schema": {
+            "schema": "<h3H3Qq1Q",
+            "sch_len": 48,
+            "keys": [
+                "short1",
+                "short2",
+                "short3",
+                "short4",
+                "text1",
+                "text2",
+                "text3",
+                "long",
+                "text4"
+            ],
+            "values": "nnnntttnt"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerHairList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<h3HQ1q",
+            "sch_len": 24,
+            "keys": [
+                "short1",
+                "short2",
+                "short3",
+                "short4",
+                "text1",
+                "long"
+            ],
+            "values": "nnnntn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerMainList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<qQ1q",
+            "sch_len": 24,
+            "keys": [
+                "long1",
+                "text1",
+                "long2"
+            ],
+            "values": "ntn",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerMapData",
+        "schema_length": 80,
+        "schema": {
+            "schema": "<q3Q2IQ2IQ4f",
+            "sch_len": 80,
+            "keys": [
+                "long1",
+                "text1",
+                "text2",
+                "arr1",
+                "int1",
+                "text3",
+                "int2",
+                "int3",
+                "text4",
+                "float1",
+                "float2",
+                "float3",
+                "float4"
+            ],
+            "values": "nttbntnntnnnn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerMapList",
+        "schema_length": 16,
+        "schema": {
+            "schema": "<q1Q",
+            "sch_len": 16,
+            "keys": [
+                "long1",
+                "text1"
+            ],
+            "values": "nt",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerMotionList",
+        "schema_length": 40,
+        "schema": {
+            "schema": "<q4Q",
+            "sch_len": 40,
+            "keys": [
+                "long",
+                "text1",
+                "text2",
+                "text3",
+                "text4"
+            ],
+            "values": "ntttt"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerMouseList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<q2Q",
+            "sch_len": 24,
+            "keys": [
+                "long",
+                "text1",
+                "text2"
+            ],
+            "values": "ntt"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerNeckDirList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<qQ2f",
+            "sch_len": 24,
+            "keys": [
+                "long",
+                "text1",
+                "float1",
+                "float2"
+            ],
+            "values": "ntnn"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerShotList",
+        "schema_length": 16,
+        "schema": {
+            "schema": "<q1Q",
+            "sch_len": 16,
+            "keys": [
+                "long1",
+                "text1"
+            ],
+            "values": "nt",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerSystemList",
+        "schema_length": 16,
+        "schema": {
+            "schema": "<q1Q",
+            "sch_len": 16,
+            "keys": [
+                "long1",
+                "text1"
+            ],
+            "values": "nt",
+            "primary_key": "long1"
+        }
+    },
+    {
+        "info_comment": "Sky 2nd",
+        "table_header": "ViewerWeaponList",
+        "schema_length": 24,
+        "schema": {
+            "schema": "<h3HQ1q",
+            "sch_len": 24,
+            "keys": [
+                "short1",
+                "short2",
+                "short3",
+                "short4",
+                "text1",
+                "long"
+            ],
+            "values": "nnnntn"
         }
     },
     {
