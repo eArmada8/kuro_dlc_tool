@@ -2,6 +2,7 @@
     {
         "info_comment": "Kai",
         "table_header": "BargainItem",
+        "table_file": "t_shop.tbl",
         "schema_length": 48,
         "schema": {
             "schema": "<I2H2Q2IQ2I",
@@ -22,6 +23,7 @@
     {
         "info_comment": "Sky 1st",
         "table_header": "CharaArrange",
+        "table_file": "t_shop.tbl",
         "schema_length": 64,
         "schema": {
             "schema": "<2I2Q4fQ4f",
@@ -47,6 +49,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "CharaArrange",
+        "table_file": "t_shop.tbl",
         "schema_length": 72,
         "schema": {
             "schema": "<2I3Q4fQ4f",
@@ -73,6 +76,7 @@
     {
         "info_comment": "Sky 1st",
         "table_header": "CharaSettingInfo",
+        "table_file": "t_shop.tbl",
         "schema_length": 20,
         "schema": {
             "schema": "<I4f",
@@ -90,6 +94,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "CostumeAttachOffset",
+        "table_file": "t_costume.tbl",
         "schema_length": 56,
         "schema": {
             "schema": "<2IQ10f",
@@ -115,6 +120,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "CostumeAttachTable",
+        "table_file": "t_costume.tbl",
         "schema_length": 80,
         "schema": {
             "schema": "<2I2i8Q",
@@ -143,6 +149,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "CostumeMaterialTable",
+        "table_file": "t_costume.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<2I2Q",
@@ -163,6 +170,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "CostumeParam",
+        "table_file": "t_costume.tbl",
         "schema_length": 56,
         "schema": {
             "schema": "<4H2Q2I3Q",
@@ -186,6 +194,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "CostumeParam",
+        "table_file": "t_costume.tbl",
         "schema_length": 64,
         "schema": {
             "schema": "<4H3Q2I3Q",
@@ -210,6 +219,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "CostumeTable",
+        "table_file": "t_costume.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<2I2Q",
@@ -230,6 +240,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "CostumeUIFaceTable",
+        "table_file": "t_costume.tbl",
         "schema_length": 48,
         "schema": {
             "schema": "<Ii2IQ2IQ2I",
@@ -250,6 +261,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "DLCTable",
+        "table_file": "t_dlc.tbl",
         "schema_length": 64,
         "schema": {
             "schema": "<2IQ2IQ2I3Q",
@@ -272,6 +284,7 @@
     {
         "info_comment": "Kuro 1",
         "table_header": "DLCTableData",
+        "table_file": "t_dlc.tbl",
         "schema_length": 88,
         "schema": {
             "schema": "<2IQ2IQ2I3Q2HIQ2I",
@@ -299,6 +312,7 @@
     {
         "info_comment": "Kuro 2",
         "table_header": "DLCTableData",
+        "table_file": "t_dlc.tbl",
         "schema_length": 64,
         "schema": {
             "schema": "<2IQ2IQ2I3Q",
@@ -321,6 +335,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "DLCTableData",
+        "table_file": "t_dlc.tbl",
         "schema_length": 72,
         "schema": {
             "schema": "<2IQ2IQ2I4Q",
@@ -344,6 +359,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ItemKindParam2",
+        "table_file": "t_item.tbl",
         "schema_length": 16,
         "schema": {
             "schema": "<2Q",
@@ -359,6 +375,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "ItemParam",
+        "table_file": "t_item.tbl",
         "schema_length": 176,
         "schema": {
             "schema": "<2I2Q2B3HI3fI3fI3fI3fI3f2IQ4I4Q",
@@ -412,6 +429,7 @@
     {
         "info_comment": "Sky 1st",
         "table_header": "ItemShopTabType",
+        "table_file": "t_item.tbl",
         "schema_length": 8,
         "schema": {
             "schema": "<2I",
@@ -426,6 +444,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ItemTabType",
+        "table_file": "t_item.tbl",
         "schema_length": 12,
         "schema": {
             "schema": "<3I",
@@ -442,6 +461,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ItemTableData",
+        "table_file": "t_item.tbl",
         "schema_length": 248,
         "schema": {
             "schema": "<2I2Q2BIHI2f20If20I3Q4I",
@@ -514,6 +534,7 @@
     {
         "info_comment": "Sky 1st",
         "table_header": "ItemTableData",
+        "table_file": "t_item.tbl",
         "schema_length": 232,
         "schema": {
             "schema": "<2I2Q2B3HI2f20If10I6i3Q4I",
@@ -583,6 +604,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ItemTableData",
+        "table_file": "t_item.tbl",
         "schema_length": 256,
         "schema": {
             "schema": "<2Q2I2Q2B3HI2f20If11I7i3Q4I",
@@ -590,7 +612,7 @@
             "keys": [
                 "id",
                 "chr_restrict",
-				"unk0",
+                "unk0",
                 "flags",
                 "unk_txt",
                 "category",
@@ -622,7 +644,7 @@
                 "eff5_1",
                 "eff5_2",
                 "float3",
-				"unk1",
+                "unk1",
                 "hp",
                 "ep",
                 "str",
@@ -639,7 +661,7 @@
                 "mov",
                 "stack_size",
                 "price",
-				"unk2",
+                "unk2",
                 "anim",
                 "name",
                 "desc",
@@ -655,6 +677,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "ItemTableData",
+        "table_file": "t_item.tbl",
         "schema_length": 176,
         "schema": {
             "schema": "<2I3QI2hI3I4BI2B3HQfI10iIfIfIfIfQ2I",
@@ -714,6 +737,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "MedalItem",
+        "table_file": "t_shop.tbl",
         "schema_length": 8,
         "schema": {
             "schema": "<2I",
@@ -728,6 +752,7 @@
     {
         "info_comment": "Kuro 1",
         "table_header": "NameTableData",
+        "table_file": "t_name.tbl",
         "schema_length": 88,
         "schema": {
             "schema": "<11Q",
@@ -751,6 +776,7 @@
     {
         "info_comment": "Kuro 2",
         "table_header": "NameTableData",
+        "table_file": "t_name.tbl",
         "schema_length": 104,
         "schema": {
             "schema": "<13Q",
@@ -776,6 +802,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "ProductInfo",
+        "table_file": "t_shop.tbl",
         "schema_length": 96,
         "schema": {
             "schema": "<2I2iQ2IQ2IQ2I4i2Q",
@@ -804,6 +831,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "QuartzParam",
+        "table_file": "t_orbment.tbl",
         "schema_length": 28,
         "schema": {
             "schema": "<8H8BI",
@@ -834,6 +862,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "RecipeTableData",
+        "table_file": "t_recipe.tbl",
         "schema_length": 60,
         "schema": {
             "schema": "<15I",
@@ -862,6 +891,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "SNameTable",
+        "table_file": "t_name.tbl",
         "schema_length": 96,
         "schema": {
             "schema": "<2I9QiIQ",
@@ -888,6 +918,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ShopConv",
+        "table_file": "t_shop.tbl",
         "schema_length": 36,
         "schema": {
             "schema": "<I8f",
@@ -909,6 +940,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ShopInfo",
+        "table_file": "t_shop.tbl",
         "schema_length": 80,
         "schema": {
             "schema": "<4Q2H7f4I",
@@ -938,6 +970,7 @@
     {
         "info_comment": "Sky 1st",
         "table_header": "ShopInfo",
+        "table_file": "t_shop.tbl",
         "schema_length": 72,
         "schema": {
             "schema": "<4Q2H7f4H",
@@ -967,6 +1000,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "ShopInfo",
+        "table_file": "t_shop.tbl",
         "schema_length": 32,
         "schema": {
             "schema": "<2I3Q",
@@ -984,6 +1018,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ShopItem",
+        "table_file": "t_shop.tbl",
         "schema_length": 40,
         "schema": {
             "schema": "<2HIQ2IQ2I",
@@ -1003,6 +1038,7 @@
     {
         "info_comment": "Ys X",
         "table_header": "ShopNameInfo",
+        "table_file": "t_shop.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<2I2Q",
@@ -1019,6 +1055,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "ShopNormalBargain",
+        "table_file": "t_shop_normal.tbl",
         "schema_length": 48,
         "schema": {
             "schema": "<I2H2fQ2IQ2I",
@@ -1040,6 +1077,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "ShopNormalInfo",
+        "table_file": "t_shop_normal.tbl",
         "schema_length": 40,
         "schema": {
             "schema": "<2I4Q",
@@ -1058,6 +1096,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "ShopNormalItem",
+        "table_file": "t_shop_normal.tbl",
         "schema_length": 40,
         "schema": {
             "schema": "<HhiQIiQI1i",
@@ -1077,6 +1116,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "ShopTypeDesc",
+        "table_file": "t_shop.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<2Q8B",
@@ -1099,6 +1139,7 @@
     {
         "info_comment": "",
         "table_header": "SkillChangeParam",
+        "table_file": "t_skill.tbl",
         "schema_length": 8,
         "schema": {
             "schema": "<Hh2H",
@@ -1115,6 +1156,7 @@
     {
         "info_comment": "KyotoXanadu",
         "table_header": "SkillEffectText",
+        "table_file": "t_item.tbl",
         "schema_length": 96,
         "schema": {
             "schema": "<2I11Q",
@@ -1140,6 +1182,7 @@
     {
         "info_comment": "Kuro 1",
         "table_header": "SkillGetParam",
+        "table_file": "t_skill.tbl",
         "schema_length": 6,
         "schema": {
             "schema": "<3H",
@@ -1155,6 +1198,7 @@
     {
         "info_comment": "Kuro 2",
         "table_header": "SkillGetParam",
+        "table_file": "t_skill.tbl",
         "schema_length": 10,
         "schema": {
             "schema": "<5H",
@@ -1172,6 +1216,7 @@
     {
         "info_comment": "",
         "table_header": "SkillGrendelParam",
+        "table_file": "t_skill.tbl",
         "schema_length": 4,
         "schema": {
             "schema": "<2H",
@@ -1186,6 +1231,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "SkillParam",
+        "table_file": "t_skill.tbl",
         "schema_length": 176,
         "schema": {
             "schema": "<HihQ2BihQi3f20If3HhHh4Q",
@@ -1247,6 +1293,7 @@
     {
         "info_comment": "Kuro 2",
         "table_header": "SkillPowerIcon",
+        "table_file": "t_skill.tbl",
         "schema_length": 8,
         "schema": {
             "schema": "<2i",
@@ -1262,6 +1309,7 @@
     {
         "info_comment": "Kuro 1 / 2",
         "table_header": "TradeItem",
+        "table_file": "t_shop.tbl",
         "schema_length": 52,
         "schema": {
             "schema": "<13I",
@@ -1287,6 +1335,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerAttachList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 32,
         "schema": {
             "schema": "<h3HQ2I1q",
@@ -1307,6 +1356,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerBGMList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<iIQ1q",
@@ -1323,6 +1373,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerCharaEquipList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<qQ1q",
@@ -1339,6 +1390,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerCharaList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 64,
         "schema": {
             "schema": "<hHI3Q2I2Q2f",
@@ -1363,6 +1415,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerCharaSelectList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<q2Q",
@@ -1379,6 +1432,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerCheekList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<q2Q",
@@ -1394,6 +1448,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerCostumeList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 32,
         "schema": {
             "schema": "<h3HQ2I1Q",
@@ -1414,6 +1469,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerEnvList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 16,
         "schema": {
             "schema": "<q1Q",
@@ -1429,6 +1485,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerEyeLineList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<q2Q",
@@ -1444,6 +1501,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerFaceList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 48,
         "schema": {
             "schema": "<h3H3Qq1Q",
@@ -1465,6 +1523,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerHairList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<h3HQ1q",
@@ -1483,6 +1542,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerMainList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<qQ1q",
@@ -1499,6 +1559,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerMapData",
+        "table_file": "t_viewer.tbl",
         "schema_length": 80,
         "schema": {
             "schema": "<q3Q2IQ2IQ4f",
@@ -1524,6 +1585,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerMapList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 16,
         "schema": {
             "schema": "<q1Q",
@@ -1539,6 +1601,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerMotionList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 40,
         "schema": {
             "schema": "<q4Q",
@@ -1556,6 +1619,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerMouseList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<q2Q",
@@ -1571,6 +1635,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerNeckDirList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<qQ2f",
@@ -1587,6 +1652,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerShotList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 16,
         "schema": {
             "schema": "<q1Q",
@@ -1602,6 +1668,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerSystemList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 16,
         "schema": {
             "schema": "<q1Q",
@@ -1617,6 +1684,7 @@
     {
         "info_comment": "Sky 2nd",
         "table_header": "ViewerWeaponList",
+        "table_file": "t_viewer.tbl",
         "schema_length": 24,
         "schema": {
             "schema": "<h3HQ1q",
@@ -1635,6 +1703,7 @@
     {
         "info_comment": "Kuro 1 / 2 / Kai",
         "table_header": "VoiceTableData",
+        "table_file": "t_voice.tbl",
         "schema_length": 40,
         "schema": {
             "schema": "<IiQififQ",

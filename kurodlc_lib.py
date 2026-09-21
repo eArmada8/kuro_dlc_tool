@@ -13,6 +13,7 @@ except ModuleNotFoundError as e:
 class kuro_tables:
     def __init__(self):
         self.schemas = {}
+        self.table_dict = {}
         self.schema_dict = {}
         self.crc_dict = {}
         self.missing_schemas = []
@@ -27,6 +28,7 @@ class kuro_tables:
         if os.path.exists(schema_filename):
             kurodlc_schema = json.loads(open(schema_filename,'rb').read())
             self.schemas = {(x['table_header'],x['schema_length']):x['schema'] for x in kurodlc_schema}
+            self.table_dict = {x['table_header']:x['table_file'] for x in kurodlc_schema}
         else:
             print("kurodlc_schema.json is missing!  This tool will not be able to read tables.")
             input("Press Enter to continue.")
@@ -107,13 +109,20 @@ class kuro_tables:
                                 problem_keys.append(schema['keys'][i])
                                 pass_value_validation = False
                     if pass_value_validation == False:
-                        input("Validation of {0} failed, values {1} in {2} do not match the schema!".format(json_name, problem_keys, key))
+                        print("Validation of {0} failed, values {1} in {2} do not match the schema!".format(json_name, problem_keys, key))
+                        input("Press Enter to abort.")
                         raise
                 else:
-                    input("Validation of {0} in {1} skipped, schema not found! (tbl file not supported)".format(key, json_name))
+                    print("Validation of {0} in {1} skipped, schema not found! (tbl file not supported)".format(key, json_name))
+                    input("Press Enter to abort.")
                     raise
             else:
-                input("Validation of {0} in {1} failed, schema not found! (tbl file is missing)".format(key, json_name))
+                print("Validation of {0} in {1} failed, schema not found!".format(key, json_name))
+                if key in self.table_dict:
+                    print("{0} / {0}.original is missing.".format(self.table_dict[key]))
+                else:
+                    print("A tbl file is missing.")
+                input("Press Enter to abort.")
                 raise
         return(json_data)
 
